@@ -1,0 +1,15 @@
+{
+    "name": "thibault/blog",
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "src/controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "Thibault Delattre",
+            "email": "delattre.thibault8@gmail.com"
+        }
+    ],
+    "require": {}
+}
