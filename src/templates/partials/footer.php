@@ -1,5 +1,5 @@
 <footer>
-    <div>
+    <div id="liens_footer">
         <a href="#">Mentions Légales</a>
         <a href="#">Politique de confidentialité</a>
         <a href="#">Politique de cookies</a>

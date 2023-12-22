@@ -34,6 +34,10 @@ header {
     margin-left: 50px;
 }
 
+#logo img {
+    height: 80px;
+}
+
 #menu {
     height: 100%;
     width: 50%;
@@ -73,11 +77,19 @@ header {
     margin-right: 50px;
 }
 
+#liens_reseaux img {
+    height: 40px;
+}
+
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex: 1;
 }
 
 #profil {
+    width: 80%;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -94,27 +106,174 @@ h1 {
 }
 
 #articles_cv {
+    width: 80%;
     display: flex;
-    justify-content: center;
-    background-color: red;
+    justify-content: space-between;
 }
 
 #articles {
-    width: 65%;
+    width: 75%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: blue;
+}
+
+.post {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #ada48b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.post a {
+    display: flex;
+    text-decoration: none;
+    color: var(--couleurTitres);
+}
+
+.post img {
+    height: 150px;
+    width: 150px;
+}
+
+.titre_chapo {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titre {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chapo {
+    width: 100%;
+    text-align: justify;
+}
+
+#plus_articles {
+    width: 100%;
+    text-align: right;
+}
+
+#plus_articles a {
+    color: var(--couleurTitres);
+    padding-right: 20px;
+}
+
+#plus_articles a:hover {
+    color: var(--couleurTexte);
 }
 
 #cv {
-    width: 25%;
-    background-color: green;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    color: var(--couleurTitres);
+    background-color: #ada48b;
 }
 
+#cv_img {
+    height: 400px;
+    width: 100%;
+}
 
+#cv_img a {
+    display: flex;
+}
+
+#cv_img img {
+    height: 400px;
+    width: 100%;
+}
+
+#cv_img p {
+    text-align: justify;
+}
+
+#contact {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    color: var(--couleurTitres);
+    background-color: #ada48b;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact label {
+    width: 300px;
+}
+
+#contact form input:not(.bouton),
+#contact form textarea {
+    height: 20px;
+    width: 300px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 10px;
+}
+
+#contact form textarea {
+    height: 100px;
+}
+
+.bouton {
+    height: 30px;
+    width: 100px;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--couleurTitres);
+    color: var(--couleurTexte);
+    cursor: pointer;
+}
+
+.bouton:hover {
+    background-color: var(--couleurTexte);
+    color: var(--couleurTitres);
+}
 
 footer {
-    height: 150px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--couleurBlocs);
+}
+
+#liens_footer {
+    display: flex;
+    justify-content: center;
+}
+
+#liens_footer a {
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 50px;
+    color: var(--couleurLiens);
+}
+
+#liens_footer a:hover {
+    text-decoration: none;
+    color: var(--couleurTitres);
+}
+
+footer p {
+    color: var(--couleurLiens);
 }
