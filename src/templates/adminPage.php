@@ -1,5 +1,9 @@
 <?php include 'partials/header.php'; ?>
 
-<!-- Contenu spécifique à la vue -->
+<main>
+
+    <!-- Contenu -->
+
+</main>
 
 <?php include 'partials/footer.php'; ?>

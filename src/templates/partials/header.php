@@ -14,9 +14,9 @@
         <div id="menu">
             <nav>
                 <ul>
-                    <li><a href="accueil.php">Accueil</a></li>
-                    <li><a href="page1.php">Articles</a></li>
-                    <li><a href="page2.php">Se connecter</a></li>
+                    <li><a href="index.php">Accueil</a></li>
+                    <li><a href="index.php?action=postsList">Articles</a></li>
+                    <li><a href="index.php?action=login">Se connecter</a></li>
                 </ul>
             </nav>
         </div>
@@ -24,5 +24,6 @@
             <a href="#" target="_blank"><img src="../public/images/logo_fb.png" alt="logo facebook"></a>
             <a href="#" target="_blank"><img src="../public/images/logo_lkdin.png" alt="logo LinkedIn"></a>
             <a href="#" target="_blank"><img src="../public/images/logo_twitter.png" alt="logo twitter"></a>
+            <!-- lien vers github -->
         </div>
     </header>

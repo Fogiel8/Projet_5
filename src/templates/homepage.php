@@ -31,7 +31,7 @@
                     </div>
                 </a>
             </div>
-            <div id="plus_articles"><a href="#">Voir tous les articles</a></div>
+            <div id="plus_articles"><a href="index.php?action=postsList">Voir tous les articles</a></div>
         </div>
         <div id="cv">
             <h2>Mon parcours</h2>

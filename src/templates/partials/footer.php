@@ -4,6 +4,7 @@
         <a href="#">Politique de confidentialité</a>
         <a href="#">Politique de cookies</a>
     </div>
+    <a href="index.php?action=adminPage">Administration</a>
     <p>copyright</p>
 </footer>
 </body>
