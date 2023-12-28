@@ -16,12 +16,6 @@ use Controllers\Error;
 $action = $_GET['action'] ?? '';
 
 
-// ou match ? avec php 8
-
-// match ($action) {
-//     'Post' => (new Post())->postAction(),
-//     default => (new Home())->home(),
-// };
 switch ($action) {
     case '':
         $controller = new Home();

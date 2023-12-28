@@ -2,7 +2,8 @@
     "name": "thibault/blog",
     "autoload": {
         "psr-4": {
-            "Controllers\\": "src/controllers"
+            "Controllers\\": "src/controllers",
+            "Models\\": "src/models"
         }
     },
     "authors": [
@@ -11,5 +12,7 @@
             "email": "delattre.thibault8@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.0"
+    }
 }
