@@ -1,0 +1,23 @@
+{% include 'partials/header.php' %}
+
+<main>
+
+    <section id="login">
+        <h2>Connexion</h2>
+        <form id="loginForm" action="#" method="post">
+            <label for="loginUsername">Nom d'utilisateur:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required>
+
+            <label for="loginPassword">Mot de passe:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+
+            <button type="submit">Connexion</button>
+        </form>    
+        <div class="switch">
+            <p>Vous n'avez pas de compte ? <a href="index.php?action=signup">Inscrivez-vous</a></p>
+        </div>
+    </section>
+
+</main>
+
+{% include 'partials/footer.php' %}

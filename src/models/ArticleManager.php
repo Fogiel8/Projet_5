@@ -2,22 +2,15 @@
 
 namespace Models;
 
-use DateTime;
 use PDO;
+use DataBaseConnection;
 
-class ArticleManager
+// creation d'un article
+class ArticleManager extends DataBaseConnection
 {
-    private PDO $db;
-    public function __construct()
+    public function createArticle(Article $article)
     {
-        $this->db = new \PDO(
-            "mysql:dbname=blog;host=127.0.0.1",
-            'root',
-            '',
-            [
-                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"
-            ]
-        );
+        $requete = $this->db->prepare('INSERT INTO articles (titre, chapo, contenu, date_creation, date_maj, user_id) VALUES (?,?,?,NOW(),NOW(),1) ');
+        $requete->execute([$article->titre(), $article->chapo(), $article->contenu()]);
     }
 }

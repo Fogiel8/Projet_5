@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class Login
+class Login extends Controller
 {
     public function login()
     {
-        include '../src/templates/login.php';
+        echo $this->twig->render('login.html.twig');
     }
 }

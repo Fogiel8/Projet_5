@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class PostsList
+class PostsList extends Controller
 {
     public function postsList()
     {
-        include '../src/templates/postsList.php';
+        echo $this->twig->render('postsList.html.twig');
     }
 }

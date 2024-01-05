@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class Home
+class Home extends Controller
 {
     public function home()
     {
-        include '../src/templates/homepage.php';
+        echo $this->twig->render('homepage.html.twig');
     }
 }
