@@ -1,7 +1,7 @@
 <?php
+session_start();
 
 // autoload
-
 require '../vendor/autoload.php';
 
 use Controllers\AddPost;
@@ -13,9 +13,8 @@ use Controllers\PostsList;
 use Controllers\Login;
 use Controllers\Post;
 use Controllers\Error;
-use Controllers\Signup;
 use Controllers\SignupController;
-use Models\Article;
+use Controllers\SignupSubmit;
 
 $action = $_GET['action'] ?? '';
 
@@ -34,11 +33,11 @@ switch ($action) {
         $controller->login();
         break;
     case 'signup':
-        $controller = new Signup;
+        $controller = new SignupController;
         $controller->signup();
         break;
     case 'signup-submit':
-        $controller = new SignupController;
+        $controller = new SignupSubmit;
         $controller->signupSubmit();
         break;
     case 'adminPage':

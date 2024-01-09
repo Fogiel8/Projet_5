@@ -3,7 +3,8 @@
 namespace Models;
 
 use PDO;
-use DataBaseConnection;
+
+require_once 'DataBaseConnection.php';
 
 // creation d'un article
 class ArticleManager extends DataBaseConnection

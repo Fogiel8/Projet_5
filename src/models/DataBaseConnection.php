@@ -1,8 +1,12 @@
 <?php
 
+namespace Models;
+
+use PDO;
+
 class DataBaseConnection
 {
-    protected PDO $db;
+    public PDO $db;
 
     public function __construct()
     {
