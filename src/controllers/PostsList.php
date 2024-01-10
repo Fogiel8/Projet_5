@@ -2,10 +2,15 @@
 
 namespace Controllers;
 
+use Models\ArticleManager;
+
 class PostsList extends Controller
 {
     public function postsList()
     {
-        echo $this->twig->render('postsList.html.twig');
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAll();
+
+        echo $this->twig->render('postsList.html.twig', ['articles' => $articles]);
     }
 }

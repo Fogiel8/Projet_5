@@ -2,7 +2,7 @@
 
 namespace Models;
 
-require_once 'DataBaseConnection.php';
+
 
 // creation d'un user
 class UserManager extends DataBaseConnection

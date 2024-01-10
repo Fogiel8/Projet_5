@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class AddPost
+class AddPost extends Controller
 {
     public function addPost()
     {
-        include '../src/templates/addPost.php';
+        echo $this->twig->render('addPost.html.twig');
     }
 }

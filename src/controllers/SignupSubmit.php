@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
+use App\PasswordManager;
 use Models\UserManager;
 use Models\User;
-use Models\DataBaseConnection;
 
 class SignupSubmit extends Controller
 {
@@ -19,28 +19,18 @@ class SignupSubmit extends Controller
             $email = $_POST["email"];
             $password = $_POST["password"];
 
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $_SESSION['errorEmail'] = 'email incorrect';
+                header('location:index.php?action=signup');
+                exit;
+            }
+
             // 2. Se connecter à la BDD (utiliser un modèle ou une classe dédiée)
-            $dataBaseConnection = new DataBaseConnection();
-            $user = new User(['nom' => $nom, 'prenom' => $prenom, 'mot_de_passe' => $password, 'email' => $email, 'statut' => 'inscrit']);
+            $user = new User(['nom' => $nom, 'prenom' => $prenom, 'mot_de_passe' => PasswordManager::hashPassword($password), 'email' => $email, 'statut' => 'inscrit']);
 
             // 3. Importer les données dans la BDD
-            $manager = new UserManager($dataBaseConnection->db);
+            $manager = new UserManager();
             $manager->createUser($user);
-
-            // 4. Récupération des données pour les afficher
-            $nom = $_POST['lastname'];
-            $prenom = $_POST['firstname'];
-            $email = $_POST['email'];
-
-            $userData = [
-                'nom' => $nom,
-                'prenom' => $prenom,
-                'email' => $email,
-            ];
-
-            $user = new User($userData);
-
-            $_SESSION['user'] = $user;
 
             echo $this->twig->render('signup-submit.html.twig', ['user' => $user]);
         }

@@ -1,0 +1,23 @@
+{% include 'partials/header.php' %}
+
+<main>
+
+    <section>
+        <h2>Ajouter un article</h2>
+        <form id="addPost" action="index.php?action=article-submit" method="post">
+            <label for="titlePost">Titre de l'article :</label>
+            <input type="text" id="titlePost" name="titlePost" required>
+
+            <label for="chapoPost">Chapô :</label>
+            <input type="text" id="chapoPost" name="chapoPost" required>
+
+            <label for="contentPost">Contenu :</label>
+            <input type="text" id="contentPost" name="contentPost" required>
+
+            <button type="submit">Créer l'article</button>
+        </form>
+    </section>
+
+</main>
+
+{% include 'partials/footer.php' %}
