@@ -1,55 +1,64 @@
 {% include 'partials/header.php' %}
 
 <main>
-    <section id="profil">
-        <div><img src="images/1697044074517.jpg" alt="Photo de profil"></div>
-        <h1>Delattre Thibault</h1>
-    </section>
-    <section id="articles_cv">
-        <div id="articles">
-            <div class="post"><a href="#">
-                    <img src="../public/images/post1.png" alt="Image du post 1">
-                    <div class="titre_chapo">
-                        <div class="titre">Les Clés du Succès Professionnel</div>
-                        <div class="chapo">Explorez les stratégies incontournables pour atteindre le sommet de votre carrière. Découvrez les conseils pratiques et les histoires inspirantes qui vous guideront vers le succès professionnel.</div>
-                    </div>
-                </a>
-            </div>
-            <div class="post"><a href="#">
-                    <img src="../public/images/post2.png" alt="Image du post 2">
-                    <div class="titre_chapo">
-                        <div class="titre">Innovation dans le Monde du Travail</div>
-                        <div class="chapo">Plongez dans l'univers dynamique de l'innovation professionnelle. De nouvelles tendances, des technologies émergentes aux méthodes de travail novatrices, tout ce que vous devez savoir pour rester à la pointe.</div>
-                    </div>
-                </a>
-            </div>
-            <div class="post"><a href="#">
-                    <img src="../public/images/post3.png" alt="Image du post 3">
-                    <div class="titre_chapo">
-                        <div class="titre">Bien-être au Travail : Équilibre et Productivité</div>
-                        <div class="chapo">Priorisez votre bien-être tout en maximisant votre productivité. Explorez des conseils pratiques, des routines de travail saines et des astuces pour maintenir un équilibre harmonieux entre vie professionnelle et personnelle.</div>
-                    </div>
-                </a>
-            </div>
-            <div id="plus_articles"><a href="index.php?action=postList">Voir tous les articles</a></div>
+    <section id="articles">
+        <div class="main-container">
+            <article class="blog-post">
+            <h2>Mon premier titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut               nim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat               cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Un deuxième titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut               nim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat               cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Jamais deux sans trois</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut               nim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat               cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Curriculum vitæ</h2>
+            <img style="height:225px; width:225px;" src="https://www.ericfreyphoto.com/wp-content/uploads/2019/07/infiniphotoericfrey.jpg">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+            </article>    
         </div>
-        <div id="cv">
-            <h2>Mon parcours</h2>
-            <div id="cv_img"><a href="#" target="_blank"><img src="../public/images/cv.png" alt="Image d'illustration du CV"></a></div>
-            <p>Transformons nos idées en lignes de code</p>
+        <div class="right-container">
+            <article class="blog-post">
+                <h2>Delattre Thibault</h2>
+                <img style="height:225px; width:225px;" src="images/1697044074517.jpg">
+                <h3>"Explorons ensemble mon parcours en PHP Symfony sur Mon Petit Journal. CV, réseaux sociaux, articles. Let's connect !"</h3>
+            </article>
+            <hr>
+            <article class="blog-post">
+                <h2>Le dernier titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut               nim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+            </article>      
         </div>
     </section>
     <section id="contact">
         <h2>Contactez-moi</h2>
         <form method="post">
             <label for="nom">Nom :</label>
-            <input type="text" name="nom" required>
+            <input type="text" name="nom" autocomplete="off" required>
 
             <label for="prenom">Prénom :</label>
-            <input type="text" name="prenom" required>
+            <input type="text" name="prenom" autocomplete="off" required>
 
             <label for="email">E-mail :</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" autocomplete="off" required>
 
             <label for="message">Message :</label>
             <textarea name="message" required></textarea>

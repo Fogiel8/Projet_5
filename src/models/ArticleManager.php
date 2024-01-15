@@ -13,7 +13,11 @@ class ArticleManager extends DataBaseConnection
         $requete->execute([$article->titre(), $article->chapo(), $article->contenu()]);
     }
 
-    public function getAll()
+    public function getAllArticles()
     {
+        $requete = $this->db->query('SELECT * FROM articles ORDER BY date_creation DESC');
+        $articles = $requete->fetchAll();
+
+        return $articles;
     }
 }

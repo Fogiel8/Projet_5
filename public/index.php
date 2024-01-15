@@ -1,18 +1,13 @@
 <?php
-session_start();
-
 // autoload
 require '../vendor/autoload.php';
 
 use Controllers\AddPost;
-use Controllers\AdminPage;
 use Controllers\ArticleSubmit;
-use Controllers\EditPost;
 use Controllers\Home;
 use Controllers\PostsList;
 use Controllers\Login;
-use Controllers\Post;
-use Controllers\Error;
+use Controllers\LoginSubmit;
 use Controllers\SignupController;
 use Controllers\SignupSubmit;
 
@@ -32,6 +27,10 @@ switch ($action) {
         $controller = new Login();
         $controller->login();
         break;
+    case 'loginSubmit':
+        $controller = new LoginSubmit();
+        $controller->loginSubmit();
+        break;
     case 'signup':
         $controller = new SignupController();
         $controller->signup();
@@ -39,18 +38,6 @@ switch ($action) {
     case 'signup-submit':
         $controller = new SignupSubmit();
         $controller->signupSubmit();
-        break;
-    case 'adminPage':
-        $controller = new AdminPage();
-        $controller->adminPage();
-        break;
-    case 'post':
-        $controller = new Post();
-        $controller->post();
-        break;
-    case 'editPost':
-        $controller = new EditPost();
-        $controller->editPost();
         break;
     case 'addPost':
         $controller = new AddPost();
@@ -60,9 +47,9 @@ switch ($action) {
         $controller = new ArticleSubmit();
         $controller->articleSubmit();
         break;
-    default:
-        header("HTTP/1.0 404 Not Found");
-        $controller = new Error();
-        $controller->error404();
-        break;
+        // default:
+        // header("HTTP/1.0 404 Not Found");
+        // $controller = new Error();
+        // $controller->error404();
+        // break;
 }

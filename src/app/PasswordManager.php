@@ -9,4 +9,9 @@ abstract class PasswordManager
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
+
+    public static function verifyPassword(string $password, string $hashedPassword): bool
+    {
+        return password_verify($password, $hashedPassword);
+    }
 }

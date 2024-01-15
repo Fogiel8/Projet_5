@@ -37,4 +37,14 @@ class Article
     {
         return $this->contenu;
     }
+
+    public function auteur(): User
+    {
+        return $this->auteur;
+    }
+
+    public function dateCreation(): DateTime
+    {
+        return $this->date_creation;
+    }
 }

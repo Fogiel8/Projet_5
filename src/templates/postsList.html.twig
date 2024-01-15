@@ -1,16 +1,21 @@
 {% include 'partials/header.php' %}
 
-<main>
+<main id="listed_posts_page">
 
-    <a href="index.php?action=addPost">Ajouter un article</a>
+    <div id="addPost_link"><div id="addPost_button"><a href="index.php?action=addPost">Ajouter un article</a></div></div>
     <h2>Liste des articles</h2>
-    <ul>
         {% for article in articles %}
-            <li>
-                <a href="index.php?action=post&id={{ article.id }}">{{ article.title }}</a>
-            </li>
+    <article class="listed_article">
+        <h3>{{ article.titre }}</h3>
+        <p>{{ article.chapo }}</p>
+        {% set originalLocale = app.request.locale %}
+        {% set dummy = app.request.setLocale('fr') %}
+        <p>{{ article.date_creation|date('Le d F Y à H:i') }}</p>
+        {% set dummy = app.request.setLocale(originalLocale) %}
+        <p>{{ article.auteur }}</p>
+        <a href="index.php?action=Post&id={{ article.id }}">Lire l'article</a>
+    </article>
         {% endfor %}
-    </ul>
 
 
 </main>
