@@ -35,7 +35,7 @@ class User
         return $this->prenom;
     }
 
-    public function mot_de_passe(): string
+    public function motDePasse(): string
     {
         return $this->mot_de_passe;
     }
