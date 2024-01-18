@@ -24,9 +24,9 @@ class SignupSubmit extends Controller
                 header('location:index.php?action=signup');
                 exit;
             }
-
+            $data = ['nom' => $nom, 'prenom' => $prenom, 'mot_de_passe' => PasswordManager::hashPassword($password), 'email' => $email, 'statut' => 'inscrit'];
             // 2. Se connecter à la BDD (utiliser un modèle ou une classe dédiée)
-            $user = new User(['nom' => $nom, 'prenom' => $prenom, 'mot_de_passe' => PasswordManager::hashPassword($password), 'email' => $email, 'statut' => 'inscrit']);
+            $user = new User($data);
 
             // 3. Importer les données dans la BDD
             $manager = new UserManager();

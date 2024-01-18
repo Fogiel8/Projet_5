@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use DateTime;
 use Models\ArticleManager;
 
 class PostsList extends Controller
@@ -13,8 +14,9 @@ class PostsList extends Controller
 
         // Appeler la méthode pour récupérer tous les articles
         $articles = $articleManager->getAllArticles();
-
         // Afficher la page Twig avec la liste des articles
-        echo $this->twig->render('postsList.html.twig', ['articles' => $articles]);
+        echo $this->twig->render('postsList.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 }

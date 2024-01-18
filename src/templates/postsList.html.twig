@@ -5,19 +5,14 @@
     <div id="addPost_link"><div id="addPost_button"><a href="index.php?action=addPost">Ajouter un article</a></div></div>
     <h2>Liste des articles</h2>
         {% for article in articles %}
-    <article class="listed_article">
-        <h3>{{ article.titre }}</h3>
-        <p>{{ article.chapo }}</p>
-        {% set originalLocale = app.request.locale %}
-        {% set dummy = app.request.setLocale('fr') %}
-        <p>{{ article.date_creation|date('Le d F Y à H:i') }}</p>
-        {% set dummy = app.request.setLocale(originalLocale) %}
-        <p>{{ article.auteur }}</p>
-        <a href="index.php?action=Post&id={{ article.id }}">Lire l'article</a>
-    </article>
+            <article class="listed_article">
+                <h3>{{ article.titre }}</h3>
+                <p>{{ article.chapo }}</p>
+                <p>{{ article.date_creation|date('d F Y H:i') }}</p>
+                <p>{{ article.auteur.nom }}</p>
+                <a href="index.php?action=Post&id={{ article.id }}">Lire l'article</a>
+            </article>
         {% endfor %}
-
-
 </main>
 
 {% include 'partials/footer.php' %}

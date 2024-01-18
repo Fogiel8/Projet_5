@@ -2,8 +2,7 @@
 
 namespace Models;
 
-use Models\Comment;
-use Models\Article;
+use App\PasswordManager;
 
 class User
 {
@@ -48,5 +47,17 @@ class User
     public function statut(): string
     {
         return $this->statut;
+    }
+
+
+
+    public function authenticate($password): bool // verrification du mot de passe
+    {
+        if (PasswordManager::verifyPassword($password, $this->motDePasse())) {
+            $_SESSION['user_id'] = $this->id;
+            return true;
+        }
+
+        return false;
     }
 }

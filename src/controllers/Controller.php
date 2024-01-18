@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\UserManager;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 

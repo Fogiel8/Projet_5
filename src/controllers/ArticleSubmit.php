@@ -26,15 +26,6 @@ class ArticleSubmit extends Controller
             $manager = new ArticleManager($dataBaseConnection->db);
             $manager->createArticle($article);
 
-            // 5. recupération des données pour les afficher
-            $articleData = [
-                'titre' => $titlePost
-            ];
-
-            $article = new Article($articleData);
-
-            $_SESSION['article'] = $article;
-
             echo $this->twig->render('article-submit.html.twig', ['article' => $article]);
         }
     }

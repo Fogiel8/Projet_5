@@ -12,20 +12,16 @@ class LoginSubmit extends Controller
     {
         // 1. Vérifier que le formulaire a été envoyé
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // 2. Récupérer les données du formulaire
             $email = $_POST['loginEmail'];
             $password = $_POST['loginPassword'];
 
             // 3. Connexion à la BDD et chercher si l'email existe
             $userManager = new UserManager;
-            $userManager->getUserByEmail($email);
+            $user = $userManager->getUserByEmail($email); // recupération de $userData qui contient le tableau avec toutes les données du user            
 
-            // 4. Comparer le mot de passe hashé avec le mot de passe envoyé
-            $userManager->authenticate($email, $password);
+            if ($user->authenticate($password)) { // si le mot de passe correspond
 
-            // 5. Si tout est correct, rediriger l'utilisateur
-            if ($userManager->authenticate($email, $password)) {
-                header('Location: index.php?action=');
+                header('Location: index.php');
                 exit;
             }
         }

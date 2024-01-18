@@ -9,18 +9,25 @@ class Article
 {
     private int $id;
     private string $titre;
-    private DateTime $date_creation;
+    private string $date_creation;
     private string $chapo;
     private string $contenu;
-    private DateTime $date_maj;
+    private string $date_maj;
     private User $auteur;
     private array $commentaires;
 
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
-            $this->$key = $value;
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
         }
+    }
+
+    public function setAuteur(User $user)
+    {
+        $this->auteur = $user;
     }
 
     public function titre(): string
@@ -43,7 +50,7 @@ class Article
         return $this->auteur;
     }
 
-    public function dateCreation(): DateTime
+    public function dateCreation(): string
     {
         return $this->date_creation;
     }

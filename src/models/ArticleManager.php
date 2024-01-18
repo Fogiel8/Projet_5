@@ -2,8 +2,6 @@
 
 namespace Models;
 
-require_once 'DataBaseConnection.php';
-
 // creation d'un article
 class ArticleManager extends DataBaseConnection
 {
@@ -17,7 +15,15 @@ class ArticleManager extends DataBaseConnection
     {
         $requete = $this->db->query('SELECT * FROM articles ORDER BY date_creation DESC');
         $articles = $requete->fetchAll();
+        $posts = [];
+        foreach ($articles as $article) {
+            $post = new Article($article);
+            $userManager = new UserManager;
+            $user = $userManager->getUserById($article['user_id']);
 
-        return $articles;
+            $post->setAuteur($user);
+            $posts[] = $post;
+        }
+        return $posts;
     }
 }

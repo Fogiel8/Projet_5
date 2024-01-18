@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Models\UserManager;
+
 class Home extends Controller
 {
     public function home()

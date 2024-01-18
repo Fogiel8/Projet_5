@@ -2,6 +2,8 @@
 // autoload
 require '../vendor/autoload.php';
 
+session_start();
+
 use Controllers\AddPost;
 use Controllers\ArticleSubmit;
 use Controllers\Home;
@@ -11,6 +13,13 @@ use Controllers\LoginSubmit;
 use Controllers\SignupController;
 use Controllers\SignupSubmit;
 
+
+function dd($data)
+{
+    echo '<pre>';
+    var_dump($data);
+    exit;
+}
 $action = $_GET['action'] ?? '';
 
 

@@ -5,8 +5,11 @@
         <a href="#">Politique de cookies</a>
         <a href="index.php?action=adminPage">Administration</a>
     </div>
-    <p>copyright</p>
+    <p>&copy; <span id="currentYear"></span> Delattre Thibault. Tous droits réservés.</p>
 </footer>
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
 </body>
 
 </html>

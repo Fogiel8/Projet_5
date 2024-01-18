@@ -12,31 +12,25 @@ class UserManager extends DataBaseConnection
         $requete->execute([$user->nom(), $user->prenom(), $user->motDePasse(), $user->email()]);
     }
 
-    public function getUserByEmail($email)
+    public function getUserByEmail($email): User // recuperation des données du user
     {
-        $requete = $this->db->prepare('SELECT * FROM users WHERE email = ?');
-        $requete->execute([$email]);
+        $requete = $this->db->prepare('SELECT * FROM users WHERE email = ?'); // preparation de la requete
+        $requete->execute([$email]); // execution de "prepare" --> recupération de toutes les colonnes specifiques à l'email
 
-        $userData = $requete->fetch();
-
-        if (!$userData) {
-            header('Location: index.php?action=login');
-            echo 'L\'adresse email est inconnue.';
-        }
+        $userData = $requete->fetch(); // stock les données dans un tableau clé-valeur
+        $user = new User($userData);
+        return empty($userData) === false ? $user : null; // si $userData a des valeurs --> return $userData, sinon null
     }
 
-    public function authenticate($email, $password)
+    public function getUserById($id)
     {
-        $userData = $this->getUserByEmail($email);
+        $requete = $this->db->prepare('SELECT * FROM users WHERE id = ?');
+        $requete->execute([$id]);
 
-        if ($userData && PasswordManager::verifyPassword($password, $userData['mot_de_passe'])) {
-            session_start();
-            $_SESSION['user_id'] = $userData['id'];
-            return true;
-        } else {
-            header('Location: index.php?action=login');
-            echo 'Le mot de passe est incorrect.';
-            return false;
-        }
+        $userData = $requete->fetch();
+        $user = new User($userData);
+
+
+        return $user;
     }
 }
