@@ -171,18 +171,12 @@ main {
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-}
-
-.listed_article a {
-    width: 100%;
-    text-align: right;
     text-decoration: none;
     color: var(--couleurTexte);
-    font-weight: bold;
 }
 
-.listed_article a:hover {
-    text-decoration: underline;
+.content_article {
+    width: 100%;
 }
 
 section {
@@ -213,7 +207,7 @@ article h2+p::first-letter {
 
 article {
     padding: 5px;
-    transition: transform 0.3s;
+    transition: transform 0.6s;
     background-color: var(--couleurBody);
     border-radius: 15px;
     cursor: pointer;

@@ -6,7 +6,8 @@ class SignupController extends Controller
 {
     public function signup()
     {
-        $emailerror = $_SESSION['errorEmail'] ?? '';
-        echo $this->twig->render('signup.html.twig', ['error' => $emailerror]);
+        $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+
+        echo $this->twig->render('signup.html.twig', ['errors' => $errors]);
     }
 }
