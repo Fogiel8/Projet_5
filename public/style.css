@@ -127,6 +127,23 @@ main {
     flex: 1;
 }
 
+#formContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#signupForm {
+    width: 20%;
+}
+
+.error-message {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    color: red;
+}
+
 #listed_posts_page {
     display: flex;
     flex-direction: column;

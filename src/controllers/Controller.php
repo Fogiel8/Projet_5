@@ -14,18 +14,24 @@ class Controller
     {
         $twigloader = new FilesystemLoader('../src/templates');
         $this->twig = new Environment($twigloader);
+    }
 
-        // Ajoute cette partie pour la gestion des sessions flash
-        if (!isset($_SESSION['errors'])) {
-            $_SESSION['errors'] = [];
-        }
+    protected function isSubmit(): bool
+    {
+        return $_SERVER['REQUEST_METHOD'] === "POST";
+    }
 
+    protected function redirectTo(string $action): void
+    {
+        header('Location:index.php?action=' . $action);
+        exit;
+    }
+
+    protected function twigFunction()
+    {
         $session = new \Twig\TwigFunction('session', function ($what) {
-            if (isset($_SESSION[$what])) {
-                $value = $_SESSION[$what];
-                unset($_SESSION[$what]); // Supprime la session flash après utilisation
-                return $value;
-            }
+
+            return $_SESSION[$what];
         });
 
         $this->twig->addFunction($session);
