@@ -1,0 +1,72 @@
+{% include 'partials/header.php' %}
+
+<main>
+    <p>Bienvenue, {{ user.prenom }} !</p>
+    <section id="articles">
+        <div class="main-container">
+            <article class="blog-post">
+            <h2>Mon premier titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Un deuxième titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Jamais deux sans trois</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </article>
+            <article class="blog-post">
+            <h2>Curriculum vitæ</h2>
+            <img style="height:225px; width:225px;" src="https://www.ericfreyphoto.com/wp-content/uploads/2019/07/infiniphotoericfrey.jpg">
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+            </article>    
+        </div>
+        <div class="right-container">
+            <article class="blog-post">
+                <h2>Delattre Thibault</h2>
+                <img style="height:225px; width:225px;" src="images/1697044074517.jpg">
+                <h3>"Explorons ensemble mon parcours en PHP Symfony sur Mon Petit Journal. CV, réseaux sociaux, articles. Let's connect !"</h3>
+            </article>
+            <hr>
+            <article class="blog-post">
+                <h2>Le dernier titre</h2>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+            </article>      
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contactez-moi</h2>
+        <form method="post">
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" autocomplete="off" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" autocomplete="off" required>
+
+            <label for="email">E-mail :</label>
+            <input type="email" name="email" autocomplete="off" required>
+
+            <label for="message">Message :</label>
+            <textarea name="message" required></textarea>
+
+            <input class="bouton" type="submit" value="Envoyer">
+        </form>
+    </section>
+</main>
+
+{% include 'partials/footer.php' %}
