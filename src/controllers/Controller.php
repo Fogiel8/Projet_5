@@ -14,6 +14,8 @@ class Controller
     {
         $twigloader = new FilesystemLoader('../src/templates');
         $this->twig = new Environment($twigloader);
+
+        $this->twigFunction();
     }
 
     protected function isSubmit(): bool
@@ -30,10 +32,25 @@ class Controller
     protected function twigFunction()
     {
         $session = new \Twig\TwigFunction('session', function ($what) {
-
             return $_SESSION[$what];
         });
 
         $this->twig->addFunction($session);
+    }
+
+
+    // Créer une function twig flash avec en argument $type égale soit success ou danger, lorsqu'un utilisateur est enregistré il faudrais mettre un message alert representant le type success ou danger. 
+
+    public function flashMessage()
+    {
+        $type = empty($_SESSION['errors']);
+        $success = '<div class="success"><p>Success</p>';
+        $failed = '<div class="failed"><p>Failed</p>';
+
+        if ($type) {
+            echo $success;
+        }
+
+        echo $failed;
     }
 }

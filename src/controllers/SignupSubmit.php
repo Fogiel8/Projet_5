@@ -17,5 +17,6 @@ class SignupSubmit extends Controller
 
         // V. Rendre la vue avec $user qui est l'objet User, dont la variable twig s'appelle user
         echo $this->twig->render('signup-submit.html.twig', ['user' => $user]);
+        $this->flashMessage();
     }
 }

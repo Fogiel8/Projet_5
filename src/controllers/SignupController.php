@@ -31,10 +31,7 @@ class SignupController extends Controller
             $this->redirectTo('signup-submit');
         }
 
-        $errors = $_SESSION['errors'] ?? [];
-        unset($_SESSION['errors']);
-
-        echo $this->twig->render('signup.html.twig', ['errors' => $errors]);
+        echo $this->twig->render('signup.html.twig', ['errors' => []]);
     }
 
     private function validateForm(): bool

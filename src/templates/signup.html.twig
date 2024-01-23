@@ -6,6 +6,8 @@
         <h2 class="title-page">Inscription</h2>
         <div id="formContent">
             <form id="signupForm" action="index.php?action=signup" method="post">
+            {% set errors = session('errors') %}
+
                 <label for="lastname">Nom :</label>
                 <input type="text" id="lastname" name="lastname" autocomplete="off" required>
                 {% if errors.nom %}
