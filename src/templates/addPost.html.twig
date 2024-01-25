@@ -1,7 +1,7 @@
 
-{% include 'partials/header.php' %}
+{% extends 'partials/layout.html.twig' %}
 
-<main>
+{% block content %}
 
     <section id="contact">
         <h2>Ajouter un article</h2>
@@ -19,6 +19,4 @@
         </form>
     </section>
 
-</main>
-
-{% include 'partials/footer.php' %}
+{% endblock %}

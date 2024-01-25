@@ -10,25 +10,36 @@ class SignupController extends Controller
 {
     public function signup()
     {
-        if (true === $this->isSubmit() && true === $this->validateForm()) {
-            // III. Création de l'objet User et attribution des données du tableau associatif
-            $user = new User([
-                'nom' => $_POST["lastname"],
-                'prenom' => $_POST["firstname"],
-                'mot_de_passe' => PasswordManager::hashPassword($_POST["password"]),
-                'email' => $_POST["email"],
-                'statut' => 'inscrit'
-            ]);
+        //Vérification si le formulaire a été soumis CORRECTEMENT
+        if ($this->isSubmit() === true) {
 
-            // IV. Introduction des données dans la BDD
-            $manager = new UserManager();
-            $manager->createUser($user);
+            $this->validateForm();
 
-            $user = $manager->getUserByEmail($user->email());
+            if ($this->isValidForm() === true) {
+                //Création de l'objet User et attribution des clés-valeurs du tableau associatif
+                $user = new User([
+                    'nom' => $_POST["lastname"],
+                    'prenom' => $_POST["firstname"],
+                    'mot_de_passe' => PasswordManager::hashPassword($_POST["password"]),
+                    'email' => $_POST["email"],
+                    'statut' => 'inscrit'
+                ]);
 
-            $user->authenticate($_POST["password"]);
+                //Introduction des données dans la BDD
+                $manager = new UserManager();
+                $manager->createUser($user);
 
-            $this->redirectTo('signup-submit');
+                $user = $manager->getUserByEmail($user->email());
+
+                $user->authenticate($_POST["password"]);
+
+                $this->addFlashMessage('success', 'SUCCESS !!!'); //flash message en session avec type et message ou type est le nom de la clé du tableau associatif
+
+                $this->redirectTo('signup-submit');
+            }
+
+            // Ajouter ton flash message error inscription
+            $this->addFlashMessage('failed', 'FAILED !!!'); //flash message en session avec type et message ou type est le nom de la clé du tableau associatif
         }
 
         echo $this->twig->render('signup.html.twig', ['errors' => []]);
@@ -37,6 +48,7 @@ class SignupController extends Controller
     private function validateForm(): bool
     {
         $_SESSION['errors'] = [];
+        $_SESSION['flashMessage'] = [];
 
         $nom = $_POST["lastname"];
         $prenom = $_POST["firstname"];
@@ -58,6 +70,6 @@ class SignupController extends Controller
             $_SESSION['errors']['password'] = 'Le mot de passe requiert au moins une lettre minuscule, une lettre majuscule, un chiffre et une longueur minimale de 8 caractères.';
         }
 
-        return true === empty($_SESSION['errors']);
+        return empty($_SESSION['errors']) === true;
     }
 }

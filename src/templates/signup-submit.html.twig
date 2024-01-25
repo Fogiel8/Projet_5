@@ -1,6 +1,7 @@
-{% include 'partials/header.php' %}
+{% extends 'partials/layout.html.twig' %}
 
-<main>
+{% block content %}
+
     <section class="page-section">
         <h2 class="title-page">Inscription réussie !</h2>
         
@@ -11,6 +12,5 @@
 
         <p>Vous pouvez vous connecter en cliquant <a href="index.php?action=login">ici</a></p>
     </section>
-</main>
 
-{% include 'partials/footer.php' %}
+{% endblock %}

@@ -1,6 +1,8 @@
-{% include 'partials/header.php' %}
+{% extends 'partials/layout.html.twig' %}
 
-<main id="listed_posts_page">
+{% block content %}
+
+<div id="listed_posts_page">
 
     <div id="addPost_link"><div id="addPost_button"><a href="index.php?action=addPost">Ajouter un article</a></div></div>
 
@@ -16,6 +18,6 @@
             </a>
         {% endfor %}
 
-</main>
+</div>
 
-{% include 'partials/footer.php' %}
+{% endblock %}

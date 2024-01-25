@@ -4,6 +4,8 @@ namespace Controllers;
 
 use Models\UserManager;
 use Twig\Environment;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
 class Controller
@@ -32,25 +34,30 @@ class Controller
     protected function twigFunction()
     {
         $session = new \Twig\TwigFunction('session', function ($what) {
-            return $_SESSION[$what];
+            return $_SESSION[$what] ?? null;
         });
 
         $this->twig->addFunction($session);
+
+        $this->twig->addFunction(new \Twig\TwigFunction('flashMessages', function () {
+            $messages =  $_SESSION['flashMessages'] ?? [];
+
+            unset($_SESSION['flashMessages']);
+
+            return $messages;
+        }));
     }
 
 
     // Créer une function twig flash avec en argument $type égale soit success ou danger, lorsqu'un utilisateur est enregistré il faudrais mettre un message alert representant le type success ou danger. 
 
-    public function flashMessage()
+    public function addFlashMessage(string $type, string $message): void
     {
-        $type = empty($_SESSION['errors']);
-        $success = '<div class="success"><p>Success</p>';
-        $failed = '<div class="failed"><p>Failed</p>';
+        $_SESSION['flashMessages'][] = ['type' => $type, 'message' => $message];
+    }
 
-        if ($type) {
-            echo $success;
-        }
-
-        echo $failed;
+    public function isValidForm(): bool
+    {
+        return empty($_SESSION['errors']) === true;
     }
 }

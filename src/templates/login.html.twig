@@ -1,6 +1,6 @@
-{% include 'partials/header.php' %}
+{% extends 'partials/layout.html.twig' %}
 
-<main>
+{% block content %}
 
     <section class="page-section">
         <h2 class="title-page">Connexion</h2>
@@ -18,6 +18,4 @@
         </div>
     </section>
 
-</main>
-
-{% include 'partials/footer.php' %}
+{% endblock %}

@@ -15,6 +15,28 @@ html {
     cursor: default;
 }
 
+.flash_message {
+    position: absolute;
+    right: 10px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#success {
+    top: 10px;
+    color: rgb(2, 82, 2);
+    background-color: rgb(101, 241, 101);
+}
+
+#failed {
+    top: 65px;
+    color: rgb(107, 3, 3);
+    background-color: rgb(241, 147, 147);
+}
+
 body {
     margin: 0;
     padding: 0;

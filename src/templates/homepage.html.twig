@@ -1,7 +1,9 @@
 {% extends 'partials/layout.html.twig' %}
 
 {% block content %}
+
     <p>Bienvenue, {{ user.prenom }} !</p>
+
     <section id="articles">
         <div class="main-container">
             <article class="blog-post">
@@ -67,4 +69,5 @@
             <input class="bouton" type="submit" value="Envoyer">
         </form>
     </section>
+    
 {% endblock %}
