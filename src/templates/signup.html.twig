@@ -1,11 +1,14 @@
-{% include 'partials/header.php' %}
+{% extends 'partials/layout.html.twig' %}
 
-<main>
+{% block content %}
 
     <section class="page-section">
         <h2 class="title-page">Inscription</h2>
         <div id="formContent">
             <form id="signupForm" action="index.php?action=signup" method="post">
+
+            {% set errors = session('errors') %}
+
                 <label for="lastname">Nom :</label>
                 <input type="text" id="lastname" name="lastname" autocomplete="off" required>
                 {% if errors.nom %}
@@ -40,6 +43,4 @@
         </div>
     </section>
 
-</main>
-
-{% include 'partials/footer.php' %}
+{% endblock %}
