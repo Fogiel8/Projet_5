@@ -15,7 +15,7 @@ class SignupController extends Controller
 
             $this->validateForm();
 
-            if ($this->isValidForm() === true) {
+            if ($this->isValidForm()) {
                 //Création de l'objet User et attribution des clés-valeurs du tableau associatif
                 $user = new User([
                     'nom' => $_POST["lastname"],
@@ -40,6 +40,7 @@ class SignupController extends Controller
 
             // Ajouter ton flash message error inscription
             $this->addFlashMessage('failed', 'FAILED !!!'); //flash message en session avec type et message ou type est le nom de la clé du tableau associatif
+            $this->redirectTo('signup');
         }
 
         echo $this->twig->render('signup.html.twig', ['errors' => []]);

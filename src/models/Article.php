@@ -25,6 +25,11 @@ class Article
         }
     }
 
+    public function id(): int
+    {
+        return $this->id;
+    }
+
     public function setAuteur(User $user)
     {
         $this->auteur = $user;

@@ -2,10 +2,9 @@
 
 namespace Controllers;
 
-use DateTime;
 use Models\ArticleManager;
 
-class PostsList extends Controller
+class PostsListController extends Controller
 {
     public function postsList()
     {

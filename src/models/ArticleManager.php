@@ -26,4 +26,14 @@ class ArticleManager extends DataBaseConnection
         }
         return $posts;
     }
+
+    public function getArticle($id)
+    {
+        $requete = $this->db->prepare('SELECT * FROM articles WHERE id=?');
+        $requete->execute([$id]);
+
+        $post = $requete->fetch();
+
+        return new Article($post);
+    }
 }

@@ -31,9 +31,7 @@
                 <input type="password" id="password" name="password" required>
                 {% if errors.password %}
                     <p class="error-message">{{ errors.password }}</p>
-                {% endif %}
-
-                <input type="hidden" name="action" value="signup"/><br>
+                {% endif %}<br>
 
                 <button class="bouton" type="submit">S'inscrire</button>
             </form>

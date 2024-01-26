@@ -17,6 +17,7 @@ html {
 
 .flash_message {
     position: absolute;
+    top: 10px;
     right: 10px;
     height: 50px;
     width: 150px;
@@ -26,13 +27,11 @@ html {
 }
 
 #success {
-    top: 10px;
     color: rgb(2, 82, 2);
     background-color: rgb(101, 241, 101);
 }
 
 #failed {
-    top: 65px;
     color: rgb(107, 3, 3);
     background-color: rgb(241, 147, 147);
 }

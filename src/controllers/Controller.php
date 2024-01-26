@@ -4,8 +4,6 @@ namespace Controllers;
 
 use Models\UserManager;
 use Twig\Environment;
-use Twig\Extension\CoreExtension;
-use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
 class Controller
@@ -45,6 +43,17 @@ class Controller
             unset($_SESSION['flashMessages']);
 
             return $messages;
+        }));
+
+        $this->twig->addFunction(new \Twig\TwigFunction('user', function () {
+
+            $user = null;
+            if (!empty($_SESSION['user_id'])) {
+                $userManager = new UserManager();
+                $user = $userManager->getUserById($_SESSION['user_id']);
+            }
+
+            return $user;
         }));
     }
 
