@@ -1,0 +1,5 @@
+{% for flashMessage in flashMessages() %}
+    <div id="{{ flashMessage.type }}" class="flash_message">
+    {{ flashMessage.message }} 
+    </div>
+{% endfor %}

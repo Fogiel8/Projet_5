@@ -4,14 +4,16 @@ require '../vendor/autoload.php';
 
 session_start();
 
-use Controllers\AddPost;
-use Controllers\ArticleSubmit;
-use Controllers\Home;
-use Controllers\PostsList;
-use Controllers\Login;
-use Controllers\LoginSubmit;
+use Controllers\AddPostController;
+use Controllers\ArticleSubmitController;
+use Controllers\HomeController;
+use Controllers\PostsListController;
+use Controllers\PostController;
+use Controllers\LoginController;
+use Controllers\LoginSubmitController;
+use Controllers\LogoutController;
 use Controllers\SignupController;
-use Controllers\SignupSubmit;
+use Controllers\SignupSubmitController;
 
 
 function dd($data)
@@ -25,35 +27,43 @@ $action = $_GET['action'] ?? '';
 
 switch ($action) {
     case '':
-        $controller = new Home();
+        $controller = new HomeController();
         $controller->home();
         break;
     case 'postsList':
-        $controller = new PostsList();
+        $controller = new PostsListController();
         $controller->postsList();
         break;
+    case 'Post':
+        $controller = new PostController();
+        $controller->post();
+        break;
     case 'login':
-        $controller = new Login();
+        $controller = new LoginController();
         $controller->login();
         break;
-    case 'loginSubmit':
-        $controller = new LoginSubmit();
+    case 'login-submit':
+        $controller = new LoginSubmitController();
         $controller->loginSubmit();
+        break;
+    case 'logout':
+        $controller = new LogoutController();
+        $controller->logout();
         break;
     case 'signup':
         $controller = new SignupController();
         $controller->signup();
         break;
     case 'signup-submit':
-        $controller = new SignupSubmit();
+        $controller = new SignupSubmitController();
         $controller->signupSubmit();
         break;
     case 'addPost':
-        $controller = new AddPost();
+        $controller = new AddPostController();
         $controller->addPost();
         break;
     case 'article-submit':
-        $controller = new ArticleSubmit();
+        $controller = new ArticleSubmitController();
         $controller->articleSubmit();
         break;
         // default:

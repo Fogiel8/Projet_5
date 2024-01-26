@@ -2,11 +2,9 @@
 
 namespace Controllers;
 
-use App\PasswordManager;
-use Models\User;
 use Models\UserManager;
 
-class LoginSubmit extends Controller
+class LoginSubmitController extends Controller
 {
     public function loginSubmit()
     {
@@ -15,15 +13,17 @@ class LoginSubmit extends Controller
             $email = $_POST['loginEmail'];
             $password = $_POST['loginPassword'];
 
-            // 3. Connexion à la BDD et chercher si l'email existe
+            // 2. Connexion à la BDD et chercher si l'email existe
             $userManager = new UserManager;
             $user = $userManager->getUserByEmail($email); // recupération de $userData qui contient le tableau avec toutes les données du user            
 
             if ($user->authenticate($password)) { // si le mot de passe correspond
 
-                header('Location: index.php');
+                echo $this->twig->render('login-submit.html.twig', ['user' => $user]);
                 exit;
             }
+
+            echo $this->twig->render('login.html.twig', ['errors' => $user]);
         }
     }
 }

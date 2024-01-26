@@ -1,0 +1,12 @@
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+    <section class="page-section">
+        <h2 class="title-page">Vous êtes connecté !</h2>
+        <form action="index.php?action=logout" method="post">
+            <button type="submit">Se déconnecter</button>
+        </form>
+    </section>
+
+{% endblock %}

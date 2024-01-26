@@ -2,11 +2,9 @@
 
 namespace Controllers;
 
-use App\PasswordManager;
 use Models\UserManager;
-use Models\User;
 
-class SignupSubmit extends Controller
+class SignupSubmitController extends Controller
 {
     public function signupSubmit()
     {

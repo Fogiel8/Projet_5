@@ -2,15 +2,13 @@
 
 namespace Controllers;
 
-class AddPost extends Controller
+class AddPostController extends Controller
 {
     public function addPost()
     {
-        session_start();
 
         if (!isset($_SESSION['user_id'])) {
-            header('Location: index.php?action=login');
-            exit;
+            $this->redirectTo('login');
         }
 
         echo $this->twig->render('addPost.html.twig');
