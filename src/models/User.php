@@ -24,27 +24,27 @@ class User
         }
     }
 
-    public function nom(): string
+    public function getNom(): string
     {
         return $this->nom;
     }
 
-    public function prenom(): string
+    public function getPrenom(): string
     {
         return $this->prenom;
     }
 
-    public function motDePasse(): string
+    public function getMotDePasse(): string
     {
         return $this->mot_de_passe;
     }
 
-    public function email(): string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function statut(): string
+    public function getStatut(): string
     {
         return $this->statut;
     }
@@ -53,7 +53,7 @@ class User
 
     public function authenticate($password): bool // verrification du mot de passe
     {
-        if (PasswordManager::verifyPassword($password, $this->motDePasse())) {
+        if (PasswordManager::verifyPassword($password, $this->getMotDePasse())) {
             $_SESSION['user_id'] = $this->id;
             return true;
         }

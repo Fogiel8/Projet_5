@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use DateTime;
+use DateTimeZone;
 use Models\UserManager;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -18,14 +20,24 @@ class Controller
         $this->twigFunction();
     }
 
+    public function showCurrentDate()
+    {
+        $timezone = new DateTimeZone('Europe/Paris');
+        $currentDate = new DateTime('now', $timezone);
+
+        $this->twig->render('header.html.twig', ['currentDate' => $currentDate]);
+    }
+
     protected function isSubmit(): bool
     {
         return $_SERVER['REQUEST_METHOD'] === "POST";
     }
 
-    protected function redirectTo(string $action): void
+    protected function redirectTo(string $action, array $parameters = []): void
     {
-        header('Location:index.php?action=' . $action);
+        $parameters = [...['action' => $action], ...$parameters];
+
+        header('Location:index.php?' . http_build_query($parameters));
         exit;
     }
 
@@ -57,9 +69,6 @@ class Controller
         }));
     }
 
-
-    // Créer une function twig flash avec en argument $type égale soit success ou danger, lorsqu'un utilisateur est enregistré il faudrais mettre un message alert representant le type success ou danger. 
-
     public function addFlashMessage(string $type, string $message): void
     {
         $_SESSION['flashMessages'][] = ['type' => $type, 'message' => $message];
@@ -68,5 +77,20 @@ class Controller
     public function isValidForm(): bool
     {
         return empty($_SESSION['errors']) === true;
+    }
+
+    public function legals()
+    {
+        echo $this->twig->render('legals.html.twig');
+    }
+
+    public function privacyPolicy()
+    {
+        echo $this->twig->render('privacy-policy.html.twig');
+    }
+
+    public function cookiesPolicy()
+    {
+        echo $this->twig->render('cookies-policy.html.twig');
     }
 }

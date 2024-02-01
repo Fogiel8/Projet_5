@@ -12,4 +12,14 @@ class Comment
     private bool $approbation;
     private string $commentaire;
     private DateTime $date;
+
+
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
 }

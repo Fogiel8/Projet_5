@@ -4,16 +4,12 @@ require '../vendor/autoload.php';
 
 session_start();
 
-use Controllers\AddPostController;
-use Controllers\ArticleSubmitController;
+use Controllers\ArticleController;
+use Controllers\CommentController;
+use Controllers\Controller;
+use Controllers\ErrorController;
 use Controllers\HomeController;
-use Controllers\PostsListController;
-use Controllers\PostController;
 use Controllers\LoginController;
-use Controllers\LoginSubmitController;
-use Controllers\LogoutController;
-use Controllers\SignupController;
-use Controllers\SignupSubmitController;
 
 
 function dd($data)
@@ -30,45 +26,67 @@ switch ($action) {
         $controller = new HomeController();
         $controller->home();
         break;
-    case 'postsList':
-        $controller = new PostsListController();
-        $controller->postsList();
+    case 'list-articles':
+        $controller = new ArticleController();
+        $controller->listArticles();
         break;
-    case 'Post':
-        $controller = new PostController();
-        $controller->post();
+    case 'add-article':
+        $controller = new ArticleController();
+        $controller->createArticle();
+        break;
+    case 'comment':
+        $controller = new CommentController();
+        $controller->createComment();
+        break;
+    case 'show-article':
+        $controller = new ArticleController();
+        $controller->showArticle();
+        break;
+    case 'edit-article':
+        $controller = new ArticleController();
+        $controller->editArticle();
+        break;
+    case 'delete-article':
+        $controller = new ArticleController();
+        $controller->deleteArticle();
         break;
     case 'login':
         $controller = new LoginController();
         $controller->login();
         break;
-    case 'login-submit':
-        $controller = new LoginSubmitController();
-        $controller->loginSubmit();
+    case 'profile':
+        $controller = new LoginController();
+        $controller->profile();
         break;
     case 'logout':
-        $controller = new LogoutController();
+        $controller = new LoginController();
         $controller->logout();
         break;
     case 'signup':
-        $controller = new SignupController();
+        $controller = new LoginController();
         $controller->signup();
         break;
     case 'signup-submit':
-        $controller = new SignupSubmitController();
+        $controller = new LoginController();
         $controller->signupSubmit();
         break;
-    case 'addPost':
-        $controller = new AddPostController();
-        $controller->addPost();
+    case 'legals':
+        $controller = new Controller();
+        $controller->legals();
         break;
-    case 'article-submit':
-        $controller = new ArticleSubmitController();
-        $controller->articleSubmit();
+    case 'privacy-policy':
+        $controller = new Controller();
+        $controller->privacyPolicy();
         break;
-        // default:
-        // header("HTTP/1.0 404 Not Found");
-        // $controller = new Error();
-        // $controller->error404();
-        // break;
+    case 'cookies-policy':
+        $controller = new Controller();
+        $controller->cookiesPolicy();
+        break;
+    default:
+        header("HTTP/1.0 404 Not Found");
+        $controller = new ErrorController();
+        $controller->error404();
+        break;
 }
+
+$_SESSION['errors'] = [];

@@ -1,0 +1,24 @@
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+<div id="listed_posts_page">
+
+    <div id="addPost_link"><div id="addPost_button"><a href="index.php?action=add-article">Ajouter un article</a></div></div>
+
+    <h2>Liste des articles</h2>
+
+        {% for article in articles %}
+            <a class="listed_article" href="index.php?action=show-article&id={{ article.id }}">
+                <article class="content_article">
+                    <h3>{{ article.titre }}</h3>
+                    <p>{{ article.chapo }}</p>
+                    <p>{{ article.auteur.nom }} {{ article.auteur.prenom }}, {{ article.getDateMaj() != '0000-00-00 00:00:00' ? article.getDateMaj()|date('d F Y H:i') : article.getDateCreation()|date('d F Y H:i') }}
+</p>
+                </article>
+            </a>
+        {% endfor %}
+
+</div>
+
+{% endblock %}

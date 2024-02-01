@@ -9,7 +9,7 @@ class UserManager extends DataBaseConnection
     public function createUser(User $user)
     {
         $requete = $this->db->prepare('INSERT INTO users (nom, prenom, mot_de_passe, email, statut) VALUES (?, ?, ?, ?, "inscrit") ');
-        $requete->execute([$user->nom(), $user->prenom(), $user->motDePasse(), $user->email()]);
+        $requete->execute([$user->getNom(), $user->getPrenom(), $user->getMotDePasse(), $user->getEmail()]);
     }
 
     public function getUserByEmail($email): ?User // recuperation des données du user
@@ -19,7 +19,7 @@ class UserManager extends DataBaseConnection
 
         $userData = $requete->fetch(); // stock les données dans un tableau clé-valeur
 
-        if (true === empty($userData)) {
+        if (empty($userData)) {
             return null;
         }
 

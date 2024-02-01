@@ -1,0 +1,32 @@
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+    <section class="page-section">
+        <h2 class="title-page">Connexion</h2>
+        <div id="formContent">
+        <form id="loginForm" method="post">
+
+        {% set errors = session('errors') %}
+
+            <label for="loginEmail">Email :</label>
+            <input type="text" id="loginEmail" name="loginEmail" required>
+                {% if errors.email %}
+                    <p class="error-message">{{ errors.email }}</p>
+                {% endif %}
+
+            <label for="loginPassword">Mot de passe :</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+                {% if errors.password %}
+                    <p class="error-message">{{ errors.password }}</p>
+                {% endif %}<br>
+
+            <button class="bouton" type="submit">Connexion</button>
+        </form>
+        </div>
+        <div class="switch">
+            <p>Vous n'avez pas de compte ? <a href="index.php?action=signup">Inscrivez-vous</a></p>
+        </div>
+    </section>
+
+{% endblock %}

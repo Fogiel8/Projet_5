@@ -2,33 +2,152 @@
 
 namespace Controllers;
 
+use App\PasswordManager;
+use Models\User;
 use Models\UserManager;
+use Models\ArticleManager;
 
 class LoginController extends Controller
 {
     public function login()
     {
-        if ($this->isSubmit() === true) {
-            // 1. Vérifier que le formulaire a été envoyé
-            $email = $_POST['loginEmail'];
-            $password = $_POST['loginPassword'];
+        if ($this->isSubmit()) {
 
-            // 2. Connexion à la BDD et chercher si l'email existe
-            $userManager = new UserManager();
-            $user = $userManager->getUserByEmail($email); // recupération de $userData qui contient le tableau avec toutes les données du user            
+            $this->isValidateLoginForm();
 
-            if ($user !== null) {
-                if ($user->authenticate($password)) { // si le mot de passe correspond
+            if ($this->isValidForm()) {
+                $email = $_POST['loginEmail'];
+                $password = $_POST['loginPassword'];
+
+                $userManager = new UserManager();
+                $user = $userManager->getUserByEmail($email);
+
+                if ($user !== null && $user->authenticate($password)) {
+                    $this->addFlashMessage('success', 'Connexion réussie !');
                     $this->redirectTo('');
                 }
-
-                //récuperation $email et $password --> mettre dans un tableau $_SESSION
-
-                $this->addFlashMessage('failed', 'erreur de mot de passe');
-            } else {
-                $this->addFlashMessage('failed', 'erreur email not exist');
             }
+            $this->addFlashMessage('failed', 'Erreur de connexion !');
+            $this->redirectTo('login');
         }
-        echo $this->twig->render('login.html.twig', ['errors' => []]);
+        // Si le formulaire n'est pas soumis ou la validation échoue, afficher la page avec les erreurs
+        echo $this->twig->render('login/login.html.twig', ['errors' => []]);
+    }
+
+    public function profile()
+    {
+        $userId = $_SESSION['user_id'];
+
+        $articleManager = new ArticleManager();
+        $userArticles = $articleManager->getArticlesByUserId($userId);
+
+        echo $this->twig->render('login/profile.html.twig', ['userArticles' => $userArticles]);
+    }
+
+    public function logout()
+    {
+        session_unset();
+
+        session_destroy();
+
+        header('Location: index.php?action=login');
+        exit();
+    }
+
+    public function signup()
+    {
+        //Vérification si le formulaire a été soumis CORRECTEMENT
+        if ($this->isSubmit()) {
+
+            $this->isValidateSignupForm();
+
+            if ($this->isValidForm()) {
+                //Création de l'objet User et attribution des clés-valeurs du tableau associatif
+                $user = new User([
+                    'nom' => $_POST["lastname"],
+                    'prenom' => $_POST["firstname"],
+                    'mot_de_passe' => PasswordManager::hashPassword($_POST["password"]),
+                    'email' => $_POST["email"],
+                    'statut' => 'inscrit'
+                ]);
+
+                //Introduction des données dans la BDD
+                $manager = new UserManager();
+                $manager->createUser($user);
+
+                $user = $manager->getUserByEmail($user->getEmail());
+
+                $user->authenticate($_POST["password"]);
+
+                $this->addFlashMessage('success', 'Inscription réussie !'); //flash message en session avec type et message ou type est le nom de la clé du tableau associatif
+
+                $this->redirectTo('signup-submit');
+            }
+
+            // Ajouter ton flash message error inscription
+            $this->addFlashMessage('failed', 'Erreur d\'inscription !'); //flash message en session avec type et message ou type est le nom de la clé du tableau associatif
+            $this->redirectTo('signup');
+        }
+
+        echo $this->twig->render('login/signup.html.twig', ['errors' => []]);
+    }
+
+    public function signupSubmit()
+    {
+        $userManager = new UserManager();
+
+        $user = $userManager->getUserById($_SESSION['user_id']);
+
+        echo $this->twig->render('login/signup-submit.html.twig', ['user' => $user]);
+    }
+
+    private function isValidateLoginForm(): bool
+    {
+        $_SESSION['errors'] = [];
+        $_SESSION['flashMessage'] = [];
+
+        $email = $_POST['loginEmail'];
+        $password = $_POST['loginPassword'];
+
+        // Validation de l'e-mail
+        $userManager = new UserManager();
+        $user = $userManager->getUserByEmail($email);
+
+        if ($user === null) {
+            $_SESSION['errors']['email'] = 'L\'adresse e-mail n\'existe pas.';
+        }
+        // Validation du mot de passe
+        if (!$user->authenticate($password)) {
+            $_SESSION['errors']['password'] = 'Le mot de passe est incorrect.';
+        }
+        return empty($_SESSION['errors']);
+    }
+
+    private function isValidateSignupForm(): bool
+    {
+        $_SESSION['errors'] = [];
+        $_SESSION['flashMessage'] = [];
+
+        $nom = $_POST["lastname"];
+        $prenom = $_POST["firstname"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/';
+
+        // I.2.Verrification si les valeurs respectent les contraintes
+        if (mb_strlen($nom) < 3) {
+            $_SESSION['errors']['nom'] = "Le nom d'utilisateur doit avoir au moins 3 caractères.";
+        }
+        if (mb_strlen($prenom) < 3) {
+            $_SESSION['errors']['prenom'] = "Le prenom d'utilisateur doit avoir au moins 3 caractères.";
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['errors']['email'] = 'L\'adresse email est invalide, elle doit être sous la forme : adresse@mail.com.';
+        }
+        if (!preg_match($regex, $password)) {
+            $_SESSION['errors']['password'] = 'Le mot de passe requiert au moins une lettre minuscule, une lettre majuscule, un chiffre et une longueur minimale de 8 caractères.';
+        }
+
+        return empty($_SESSION['errors']);
     }
 }
