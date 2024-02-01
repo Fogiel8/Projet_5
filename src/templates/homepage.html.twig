@@ -2,51 +2,33 @@
 
 {% block content %}
 
-    <p>Bienvenue, {{ user.user }} !</p>
-
     <section id="articles">
         <div class="main-container">
-            <article class="blog-post">
-            <h2>Mon premier titre</h2>
+            {% for article in latestArticles %}
+                <a class="link_article" href="index.php?action=show-article&id={{ article.getId() }}"><article class="blog-post">
+                    <h2>{{ article.getTitre() }}</h2><br>
+                    <p>{{ article.getChapo() }}</p>
+                </article></a><br>
+            {% endfor %}
+            <a class="link_article" href="images/cv.pdf" target="_blank"><article class="blog-post">
+            <h2>Curriculum vitæ</h2><br>
+            <img style="height:225px; width:225px;" src="images/imgcv.jpg">
                 <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Vous pouvez consulter mon curriculum vitæ en cliquant ici.
                 </p>
-            </article>
-            <article class="blog-post">
-            <h2>Un deuxième titre</h2>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </article>
-            <article class="blog-post">
-            <h2>Jamais deux sans trois</h2>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecatcupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </article>
-            <article class="blog-post">
-            <h2>Curriculum vitæ</h2>
-            <img style="height:225px; width:225px;" src="https://www.ericfreyphoto.com/wp-content/uploads/2019/07/infiniphotoericfrey.jpg">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </article>    
+            </article></a>
         </div>
         <div class="right-container">
-            <article class="blog-post">
-                <h2>Delattre Thibault</h2>
+            <article class="blog-post2">
+                <h2>Delattre Thibault</h2><br>
                 <img style="height:225px; width:225px;" src="images/1697044074517.jpg">
                 <h3>"Explorons ensemble mon parcours en PHP Symfony sur Mon Petit Journal. CV, réseaux sociaux, articles. Let's connect !"</h3>
             </article>
-            <hr>
-            <article class="blog-post">
-                <h2>Le dernier titre</h2>
+            <hr><br>
+            <article class="blog-post2">
+                <h2>Votre Espace pour Partager, Écrire et Échanger</h2><br>
                 <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Découvrez Mon Petit Journal, une communauté dédiée au développement web. Inscrivez-vous pour rédiger des articles, partager vos connaissances, et participer activement en commentant. Rejoignez-nous dans cette aventure collaborative où chaque membre contribue à faire de Mon Petit Journal un lieu dynamique d'échanges et d'inspiration.
                 </p>
             </article>      
         </div>

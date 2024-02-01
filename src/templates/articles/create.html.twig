@@ -1,0 +1,36 @@
+
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+    <section class="page-section">
+        <h2>Ajouter un article</h2>
+        <div id="formContent">
+        <form id="addPost" method="post">
+
+        {% set errors = session('errors') %}
+        
+            <label for="titlePost">Titre de l'article :</label>
+            <input type="text" id="titlePost" name="titre" placeholder="Titre" autocomplete="off" required>
+                {% if errors.title %}
+                    <p class="error-message">{{ errors.title }}</p>
+                {% endif %}
+
+            <label for="chapoPost">Chapô :</label>
+            <textarea type="text" id="chapoPost" name="chapo" placeholder="Résumé attractif" required></textarea>
+                {% if errors.chapo %}
+                    <p class="error-message">{{ errors.chapo }}</p>
+                {% endif %}
+
+            <label for="contentPost">Contenu de l'article :</label>
+            <textarea type="text" id="contentPost" name="contenu" placeholder="Article" required></textarea>
+                {% if errors.content %}
+                    <p class="error-message">{{ errors.content }}</p>
+                {% endif %}<br>
+
+            <button class="bouton" type="submit">Créer l'article</button>
+        </form>
+        </div>
+    </section>
+
+{% endblock %}

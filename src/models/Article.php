@@ -25,9 +25,16 @@ class Article
         }
     }
 
-    public function id(): int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function setAuteur(User $user)
@@ -35,28 +42,33 @@ class Article
         $this->auteur = $user;
     }
 
-    public function titre(): string
+    public function getTitre(): string
     {
         return $this->titre;
     }
 
-    public function chapo(): string
+    public function getChapo(): string
     {
         return $this->chapo;
     }
 
-    public function contenu(): string
+    public function getContenu(): string
     {
         return $this->contenu;
     }
 
-    public function auteur(): User
+    public function getAuteur(): User
     {
         return $this->auteur;
     }
 
-    public function dateCreation(): string
+    public function getDateCreation()
     {
         return $this->date_creation;
+    }
+
+    public function getDateMaj()
+    {
+        return $this->date_maj;
     }
 }

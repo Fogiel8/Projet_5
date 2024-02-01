@@ -1,0 +1,18 @@
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+    <div id="addPost_link"><div id="addPost_button"><a href="index.php?action=logout">Se déconnecter</a></div></div>
+
+    <h2>{{ user().nom }} {{ user().prenom }}</h2>
+    <p>Adresse : {{ user().email }}</p>
+    <section id="myArticlesList">
+        <h2>Mes articles rédigés :</h2>
+        {% for article in userArticles %}
+            <div class="myArticles">
+                <div class="myTitle"><h3>• {{ article.titre }}</h3></div><div class="modify-delete">{{ article.modify }}<a href="index.php?action=edit-article&id={{ article.id }}">Modifier</a> | <a href="index.php?action=delete-article&id={{ article.id }}">Supprimer</a>{{ article.delete }}</div>
+            </div>
+        {% endfor %}
+    </section>
+
+{% endblock %}
