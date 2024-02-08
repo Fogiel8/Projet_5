@@ -32,8 +32,12 @@ class UserManager extends DataBaseConnection
         $requete->execute([$id]);
 
         $userData = $requete->fetch();
-        $user = new User($userData);
 
+        if (!$userData) {
+            return null;
+        }
+
+        $user = new User($userData);
 
         return $user;
     }

@@ -150,6 +150,39 @@ main {
     flex: 1;
 }
 
+.to_approve {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    transition: transform 0.6s, box-shadow 0.6s;
+}
+
+.to_approve:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.to_approve a {
+    text-decoration: none;
+    color: var(--couleurTexte);
+}
+
+.to_approve_content p {
+    margin: 0;
+}
+
+.approve {
+    width: 100%;
+    text-align: right;
+}
+
+.approve a:hover {
+    text-decoration: underline;
+}
+
 #post_content {
     width: 100%;
     padding-bottom: 25px;
@@ -240,7 +273,6 @@ main {
 #addPost textarea {
     width: 480px;
     height: 200px;
-    border-radius: 15px;
 }
 
 .error-message {
@@ -315,10 +347,20 @@ main {
     align-items: center;
 }
 
-.myArticles:hover,
-.myArticles:hover a {
+.myArticles,
+.myArticles a {
+    transition: transform 0.7s, background-color 0.7s;
+}
+
+.myArticles:hover {
+    transform: scale(1.05);
     color: var(--couleurBody);
     background-color: var(--couleurObjet);
+}
+
+.myArticles:hover a {
+    transform: scale(1.05);
+    color: var(--couleurBody);
 }
 
 .myTitle h3 {
@@ -348,6 +390,13 @@ main {
 
 .content_article {
     width: 100%;
+}
+
+.article_auteur,
+.article_date {
+    margin: 0;
+    text-align: right;
+    font-size: 0.8rem;
 }
 
 section {
@@ -391,23 +440,23 @@ article h2+p::first-letter {
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.6s;
+    transition: transform 0.6s, box-shadow 0.6s;
     background-color: var(--couleurBody);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .content_article {
     padding: 5px;
-    transition: transform 0.6s;
+    transition: transform 0.6s, box-shadow 0.6s;
     background-color: var(--couleurBody);
     border-radius: 15px;
-    cursor: pointer;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .blog-post:hover,
 .content_article:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 .blog-post h2,
@@ -479,12 +528,13 @@ hr {
 }
 
 input:not(.bouton),
-#contact form textarea {
+form textarea {
     height: 20px;
     width: 100%;
+    padding: 3px 5px 3px 5px;
     margin-bottom: 10px;
     border: 1px solid #333;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #contact form textarea {
@@ -495,7 +545,7 @@ input:not(.bouton),
     height: 30px;
     width: 100px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--couleurObjet);
     cursor: pointer;
 }

@@ -5,7 +5,7 @@
         <a href="https://insight.symfony.com/projects/e6a6f7dc-5196-4777-b491-ef7b49ff1bb6" target="_blank"><img src="../public/images/logo_symfony.png" alt="logo symfony"></a>
         <!--a href="#" target="_blank"><img src="../public/images/logo_share.png" alt="logo partager"></a-->
     </div>
-    <div id="date">{{ currentDate|date('l j F Y', 'Europe/Paris')}}</div>
+    <div id="date">{{ currentDate|date('l j F Y')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre', 'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})}}</div>
 </div>
 <h1>MON PETIT JOURNAL</h1>
 <div id="menu">

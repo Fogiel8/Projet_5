@@ -24,9 +24,26 @@ class User
         }
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+        return $this;
+    }
+
     public function getNom(): string
     {
         return $this->nom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+        return $this;
     }
 
     public function getPrenom(): string
@@ -49,12 +66,23 @@ class User
         return $this->statut;
     }
 
+    public function getCommentaires(): array
+    {
+        return $this->commentaires;
+    }
+
+    public function getArticles(): array
+    {
+        return $this->articles;
+    }
+
 
 
     public function authenticate($password): bool // verrification du mot de passe
     {
         if (PasswordManager::verifyPassword($password, $this->getMotDePasse())) {
             $_SESSION['user_id'] = $this->id;
+            $_SESSION['statut'] = $this->statut;
             return true;
         }
 

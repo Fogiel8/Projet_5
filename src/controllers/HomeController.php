@@ -6,7 +6,7 @@ use Models\ArticleManager;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function homePage()
     {
 
         $articleManager = new ArticleManager();

@@ -4,12 +4,14 @@
 
 <div id="post_content">
     <h2>{{ article.titre }}</h2>
-    <article>{{ article.contenu }}</article><br>
+    <p><i>{{ article.chapo }}</i></p><br>
+    <article>{{ article.contenu|nl2br }}</article><br>
     <div id="auteur_date-crea">
-        <p id="auteur">Rédigé par {{ article.auteur.nom }} {{ article.auteur.prenom }}</p>
-        <p class="date-crea">le {{ article.getDateCreation() }}</p>
-        {% if article.getDateMaj() != '' %}
-        <p class="date-crea">le {{ article.getDateMaj() }}</p>
+        <p id="auteur">Rédigé par {{ article.auteur.nom }} {{ article.auteur.prenom }},</p>
+        {% if article.getDateMaj() != '0000-00-00 00:00:00' %}
+        <p class="date-crea">et modifié le {{ article.getDateMaj()|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
+        {% else %}
+        <p class="date-crea">le {{ article.getDateCreation()|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
         {% endif %}
     </div>
 </div>
@@ -25,8 +27,8 @@
     {% endfor %}
 
     <div>
-    <form id="addComment" action="index.php?action=comment" method="post">              
-            <label for="comment">commentaire :</label>
+    <form id="addComment" action="index.php?action=comment&id={{ article.id }}" method="post">              
+            <label for="comment">Ajouter un commentaire :</label>
             <input type="text" id="comment" name="comment" placeholder="Commentaire" autocomplete="off" required><br>
 
             <button class="bouton" type="submit">Envoyer</button>
