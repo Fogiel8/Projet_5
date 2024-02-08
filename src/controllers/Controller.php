@@ -50,7 +50,7 @@ class Controller
         $this->twig->addFunction($session);
 
         $this->twig->addFunction(new \Twig\TwigFunction('flashMessages', function () {
-            $messages =  $_SESSION['flashMessages'] ?? [];
+            $messages = $_SESSION['flashMessages'] ?? [];
 
             unset($_SESSION['flashMessages']);
 

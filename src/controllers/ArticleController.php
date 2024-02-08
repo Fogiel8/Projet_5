@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Exception;
 use Models\Article;
 use Models\ArticleManager;
 
@@ -9,8 +10,12 @@ class ArticleController extends Controller
 {
     public function createArticle()
     {
+        if (empty($_SESSION['user_id'])) {
+            throw new Exception('Access denied user not authenticated');
+        }
+
         // 1. Verifier la soumission
-        if ($this->isSubmit() && !empty($_SESSION['user_id'])) {
+        if ($this->isSubmit()) {
             if ($this->isValidateArticleForm()) {
                 // 3. connexion a la bdd
                 $article = new Article($_POST);
@@ -40,7 +45,7 @@ class ArticleController extends Controller
     public function showArticle()
     {
         $id = $_GET['id'];
-        $articleManager = new ArticleManager;
+        $articleManager = new ArticleManager();
         $article = $articleManager->getArticle($id);
 
         echo $this->twig->render('articles/show.html.twig', ['article' => $article]);
