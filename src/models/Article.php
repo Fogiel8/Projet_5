@@ -37,9 +37,23 @@ class Article
         return $this->id;
     }
 
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
     public function getTitre(): string
     {
         return $this->titre;
+    }
+
+    public function setDateCreation(string $date_creation): self
+    {
+        $this->date_creation = $date_creation;
+
+        return $this;
     }
 
     public function getDateCreation()
@@ -47,14 +61,35 @@ class Article
         return $this->date_creation;
     }
 
+    public function setChapo(string $chapo): self
+    {
+        $this->chapo = $chapo;
+
+        return $this;
+    }
+
     public function getChapo(): string
     {
         return $this->chapo;
     }
 
+    public function setContenu(string $contenu): self
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
     public function getContenu(): string
     {
         return $this->contenu;
+    }
+
+    public function setDateMaj(string $date_maj): self
+    {
+        $this->date_maj = $date_maj;
+
+        return $this;
     }
 
     public function getDateMaj()
@@ -70,6 +105,13 @@ class Article
     public function getAuteur(): User
     {
         return $this->auteur;
+    }
+
+    public function setCommentaire(string $commentaire): self
+    {
+        $this->id = $commentaire;
+
+        return $this;
     }
 
     public function getCommentaire(): array

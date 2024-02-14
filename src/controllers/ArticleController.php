@@ -2,16 +2,18 @@
 
 namespace Controllers;
 
-use Exception;
 use Models\Article;
 use Models\ArticleManager;
+use Models\CommentManager;
 
 class ArticleController extends Controller
 {
     public function createArticle()
     {
-        if (empty($_SESSION['user_id'])) {
-            throw new Exception('Access denied user not authenticated');
+        if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
+            $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
+
+            return $this->redirectTo('list-articles');
         }
 
         // 1. Verifier la soumission
@@ -25,7 +27,7 @@ class ArticleController extends Controller
                 $manager = new ArticleManager();
                 $article = $manager->createArticle($article, $user_id);
 
-                $this->addFlashMessage('success', 'Article envoyé !');
+                $this->addFlashMessage('success', 'L\'article à bien été créé !');
             } else {
                 $this->addFlashMessage('failed', 'Article invalide !');
             }
@@ -44,11 +46,14 @@ class ArticleController extends Controller
 
     public function showArticle()
     {
-        $id = $_GET['id'];
+        $articleId = $_GET['id'];
         $articleManager = new ArticleManager();
-        $article = $articleManager->getArticle($id);
+        $article = $articleManager->getArticleById($articleId);
 
-        echo $this->twig->render('articles/show.html.twig', ['article' => $article]);
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getApprovedCommentsByArticleId($articleId);
+
+        echo $this->twig->render('articles/show.html.twig', ['article' => $article, 'comments' => $comments]);
     }
 
     public function isValidateArticleForm(): bool
@@ -73,16 +78,49 @@ class ArticleController extends Controller
 
     public function deleteArticle()
     {
+        if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
+            $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
+
+            return $this->redirectTo('');
+        }
+
         $id = $_GET['id'];
 
-        $delete = new ArticleManager;
+        $delete = new ArticleManager();
         $delete->deleteLigne($id);
         $this->redirectTo('profile');
     }
 
     public function editArticle()
     {
-        // recupérer l'id de l'article
-        //afficher la page avec les données
+        if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
+            $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
+
+            return $this->redirectTo('');
+        }
+
+        $articleId = $_GET['id'];
+        $articleManager = new ArticleManager();
+        $article = $articleManager->getArticleById($articleId);
+
+        // 1. Verifier la soumission
+        if ($this->isSubmit()) {
+            if ($this->isValidateArticleForm()) {
+                $article->setTitre($_POST['titre']);
+                $article->setChapo($_POST['chapo']);
+                $article->setContenu($_POST['contenu']);
+                //$article->setAuteur();
+
+                $articleManager->updateArticle($article);
+
+                $this->addFlashMessage('success', 'L\'article à bien été modifé !');
+
+                $this->redirectTo('show-article', ['id' => $article->getId()]);
+            } else {
+                $this->addFlashMessage('failed', 'Article invalide !');
+            }
+        }
+
+        echo $this->twig->render('articles/edit.html.twig', ['article' => $article]);
     }
 }

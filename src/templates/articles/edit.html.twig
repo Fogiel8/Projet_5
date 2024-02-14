@@ -1,0 +1,33 @@
+{% extends 'partials/layout.html.twig' %}
+
+{% block content %}
+
+<section id="edit">
+    <h2>Modification d'un article</h2>
+
+            {% set errors = session('errors') %}
+
+    <form action="index.php?action=edit-article&id={{ article.id }}" method="post">
+        <label for="titlePost">Modification du titre :</label>
+        <input id="titlePost" type="text" name="titre" value="{{ article.titre }}" autocomplete="off" required>
+            {% if errors.title %}
+                <p class="error-message">{{ errors.title }}</p>
+            {% endif %}
+
+        <label for="chapoPost">Modification du chapô :</label>
+        <textarea id="chapoPost" type="text" name="chapo" required>{{ article.chapo }}</textarea>
+            {% if errors.chapo %}
+                <p class="error-message">{{ errors.chapo }}</p>
+            {% endif %}
+
+        <label for="contentPost">Modification du contenu :</label>
+        <textarea id="contentPost" type="text" name="contenu" required>{{ article.contenu }}</textarea>
+            {% if errors.content %}
+                <p class="error-message">{{ errors.content }}</p>
+            {% endif %}<br>
+
+        <button class="bouton" type="submit">Modifier</button>
+    </form>
+</section>
+
+{% endblock %}

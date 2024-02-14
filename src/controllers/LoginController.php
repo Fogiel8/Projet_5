@@ -12,7 +12,6 @@ class LoginController extends Controller
     public function login()
     {
         if ($this->isSubmit()) {
-
             $this->isValidateLoginForm();
 
             if ($this->isValidForm()) {
@@ -27,8 +26,8 @@ class LoginController extends Controller
                     $this->redirectTo('');
                 }
             }
+
             $this->addFlashMessage('failed', 'Erreur de connexion !');
-            $this->redirectTo('login');
         }
         // Si le formulaire n'est pas soumis ou la validation échoue, afficher la page avec les erreurs
         echo $this->twig->render('login/login.html.twig', ['errors' => []]);
@@ -36,6 +35,12 @@ class LoginController extends Controller
 
     public function profile()
     {
+        if (empty($_SESSION['user_id'])) {
+            $this->addFlashMessage('failed', 'Vous devez vous connecter pour accéder à cette page !');
+
+            return $this->redirectTo('login');
+        }
+
         $userId = $_SESSION['user_id'];
 
         $articleManager = new ArticleManager();
@@ -58,7 +63,6 @@ class LoginController extends Controller
     {
         //Vérification si le formulaire a été soumis CORRECTEMENT
         if ($this->isSubmit()) {
-
             $this->isValidateSignupForm();
 
             if ($this->isValidForm()) {
@@ -89,16 +93,16 @@ class LoginController extends Controller
             $this->redirectTo('signup');
         }
 
-        echo $this->twig->render('login/signup.html.twig', ['errors' => []]);
+        echo $this->twig->render('login/signup.html.twig');
     }
 
     public function signupSubmit()
     {
-        $userManager = new UserManager();
+        $userId = $_SESSION['user_id'];
+        $articleManager = new ArticleManager();
+        $userArticles = $articleManager->getArticlesByUserId($userId);
 
-        $user = $userManager->getUserById($_SESSION['user_id']);
-
-        echo $this->twig->render('login/signup-submit.html.twig', ['user' => $user]);
+        echo $this->twig->render('login/profile.html.twig', ['userArticles' => $userArticles]);
     }
 
     private function isValidateLoginForm(): bool
@@ -116,10 +120,7 @@ class LoginController extends Controller
         if ($user === null) {
             $_SESSION['errors']['email'] = 'L\'adresse e-mail n\'existe pas.';
         }
-        // Validation du mot de passe
-        if (!$user->authenticate($password)) {
-            $_SESSION['errors']['password'] = 'Le mot de passe est incorrect.';
-        }
+
         return empty($_SESSION['errors']);
     }
 

@@ -17,22 +17,17 @@ class ArticleManager extends DataBaseConnection
         return $article;
     }
 
+    public function updateArticle(Article $article)
+    {
+        $requete = $this->db->prepare('UPDATE articles SET titre = ?, chapo = ?, contenu = ?, date_maj = NOW() WHERE id = ?');
+        $requete->execute([$article->getTitre(), $article->getChapo(), $article->getContenu(), $article->getId()]);
+    }
+
     public function deleteLigne($id)
     {
         $requete = $this->db->prepare('DELETE FROM articles WHERE id = ? AND user_id = ?');
         $requete->execute([$id, $_SESSION['user_id']]);
     }
-
-    public function updateLigne(Article $article): Article
-    {
-        $requete = $this->db->prepare('UPDATE articles SET titre = ?, chapo = ?, contenu = ?, date_maj = NOW() WHERE id = ?');
-        $requete->execute([$article->getTitre(), $article->getChapo(), $article->getContenu()]);
-
-        // que faire ?
-
-        return $article;
-    }
-
 
     public function getAllArticles()
     {
@@ -41,7 +36,7 @@ class ArticleManager extends DataBaseConnection
         $posts = [];
         foreach ($articles as $article) {
             $post = new Article($article);
-            $userManager = new UserManager;
+            $userManager = new UserManager();
             $user = $userManager->getUserById($article['user_id']);
 
             $post->setAuteur($user);
@@ -58,10 +53,10 @@ class ArticleManager extends DataBaseConnection
     }
 
 
-    public function getArticle($id)
+    public function getArticleById($articleId)
     {
         $requete = $this->db->prepare('SELECT * FROM articles WHERE id = ?');
-        $requete->execute([$id]);
+        $requete->execute([$articleId]);
 
         $post = $requete->fetch();
         if (empty($post)) {
@@ -69,7 +64,7 @@ class ArticleManager extends DataBaseConnection
         }
 
         $article = new Article($post);
-        $userManager = new UserManager;
+        $userManager = new UserManager();
         $user = $userManager->getUserById($post['user_id']);
         $article->setAuteur($user);
 
@@ -84,7 +79,7 @@ class ArticleManager extends DataBaseConnection
 
         foreach ($articles as $article) {
             $post = new Article($article);
-            $userManager = new UserManager;
+            $userManager = new UserManager();
             $user = $userManager->getUserById($article['user_id']);
 
             $post->setAuteur($user);

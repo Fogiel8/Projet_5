@@ -3,31 +3,46 @@
 {% block content %}
 
 <div id="post_content">
+
+    {% if user().statut == 'valide' %}
+        <div id="addPost_link">
+            <div class="custom_button violet_button">
+                <a href="index.php?action=edit-article&id={{ article.id }}" onclick="return confirm('Êtes-vous sûr de vouloir modifier cet article ?');">Modifier</a>
+            </div>            
+            <div class="custom_button red_button">
+                <a href="index.php?action=delete-article&id={{ article.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">Supprimer</a>
+            </div>
+        </div>
+    {% endif %}
+
     <h2>{{ article.titre }}</h2>
     <p><i>{{ article.chapo }}</i></p><br>
     <article>{{ article.contenu|nl2br }}</article><br>
-    <div id="auteur_date-crea">
-        <p id="auteur">Rédigé par {{ article.auteur.nom }} {{ article.auteur.prenom }},</p>
-        {% if article.getDateMaj() != '0000-00-00 00:00:00' %}
-        <p class="date-crea">et modifié le {{ article.getDateMaj()|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
-        {% else %}
-        <p class="date-crea">le {{ article.getDateCreation()|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
+    <div id="auteur_date">
+        <p class="article_auteur">Rédigé par {{ article.auteur.nom }} {{ article.auteur.prenom }},</p>
+        <p class="article_date">le {{ article.dateCreation|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}{% if article.dateMaj != '0000-00-00 00:00:00' %},</p>
+        <p class="article_date">et modifié le {{ article.dateMaj|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
         {% endif %}
     </div>
 </div>
 
 <div id="comments">
     <h2>Commentaires</h2>
+    {% if comments %}
     {% for comment in comments %}
         <div class="comment">
-            <h3>4545{{ comment.nom }} {{ comment.prenom }}</h3>
-            <p class="comment_txt">dfgd{{ comment.comment }}</p>
-            <p class="date_comment">dfg{{ comment.date }}</p>
+            <h3>{{ comment.auteur.nom }} {{ comment.auteur.prenom }}</h3>
+            <p class="comment_txt">{{ comment.commentaire }}</p>
+            <p class="article_date">{{ comment.date|date('j F Y à G:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
         </div>
     {% endfor %}
+    {% else %}
+        <p>L'article n'a pas encore été commenté.</p>
+    {% endif %}
+    <br>
 
     <div>
-    <form id="addComment" action="index.php?action=comment&id={{ article.id }}" method="post">              
+        <form id="addComment" action="index.php?action=comment&id={{ article.id }}" method="post">              
             <label for="comment">Ajouter un commentaire :</label>
             <input type="text" id="comment" name="comment" placeholder="Commentaire" autocomplete="off" required><br>
 

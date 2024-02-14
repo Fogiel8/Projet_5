@@ -1,25 +1,36 @@
 <div id="top-header">
     <div id="liens_reseaux">
-        <a href="https://www.linkedin.com/in/thibault-delattre8/" target="_blank"><img src="../public/images/logo_lkdin.png" alt="logo LinkedIn"></a>
-        <a href="https://github.com/ThibDel8" target="_blank"><img src="../public/images/logo_github.png" alt="logo github"></a>
-        <a href="https://insight.symfony.com/projects/e6a6f7dc-5196-4777-b491-ef7b49ff1bb6" target="_blank"><img src="../public/images/logo_symfony.png" alt="logo symfony"></a>
+        <a href="https://www.linkedin.com/in/thibault-delattre8/" target="_blank"><img src="images/logo_lkdin.png" alt="logo LinkedIn"></a>
+        <a href="https://github.com/ThibDel8" target="_blank"><img src="images/logo_github.png" alt="logo github"></a>
+        <a href="https://insight.symfony.com/projects/e6a6f7dc-5196-4777-b491-ef7b49ff1bb6" target="_blank"><img src="images/logo_symfony.png" alt="logo symfony"></a>
         <!--a href="#" target="_blank"><img src="../public/images/logo_share.png" alt="logo partager"></a-->
     </div>
     <div id="date">{{ currentDate|date('l j F Y')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre', 'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})}}</div>
 </div>
 <h1>MON PETIT JOURNAL</h1>
 <div id="menu">
+        <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+        <label for="burger-checkbox" class="burger-icon">
+            <div class="burger_layer"></div>
+            <div class="burger_layer"></div>
+            <div class="burger_layer"></div>
+        </label>
     <nav>
         <ul>
-            <li><a href="index.php">Accueil</a></li>
+            <li><a href="index.php">Accueil</a></li><hr class="not_pc">
             <li><a href="index.php?action=list-articles">Articles</a></li>
             <li>
                 {% if user() is not null %}
-                    <a href="index.php?action=profile">{{ user().prenom }}</a>
+                    <a class="not_mobile not_tab" href="index.php?action=profile">{{ user().prenom }}</a>
                 {% else %}
-                    <a href="index.php?action=login">Se connecter</a>
+                    <a class="not_mobile not_tab" href="index.php?action=login">Se connecter</a>
                 {% endif %}
             </li>
         </ul>
     </nav>
+        {% if user() is not null %}
+            <p class="not_pc">Bienvenue, {{ user().prenom }} !</p>
+        {% else %}
+            <a class="not_pc" href="index.php?action=login">Se connecter</a>
+        {% endif %}
 </div>
