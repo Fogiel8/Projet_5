@@ -33,7 +33,7 @@ class Controller
         return $_SERVER['REQUEST_METHOD'] === "POST";
     }
 
-    protected function redirectTo(string $action, array $parameters = []): void
+    protected function redirectTo(string $action, array $parameters = []): bool
     {
         $parameters = ['action' => $action] + $parameters;
 
@@ -41,7 +41,7 @@ class Controller
 
         header('Location: index.php?' . $queryString, true, 302);
 
-        exit;
+        return true;
     }
 
 
