@@ -19,7 +19,7 @@ class CommentController extends Controller
             $idArticle = $_GET['id'];
 
             $articleManager = new ArticleManager();
-            $article = $articleManager->getArticle($idArticle);
+            $article = $articleManager->getArticleById($idArticle);
 
             $userManager = new UserManager();
             $user = $userManager->getUserById($_SESSION['user_id']);
@@ -42,7 +42,6 @@ class CommentController extends Controller
     public function adminPage()
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
-
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
 
             return $this->redirectTo('');
@@ -56,7 +55,6 @@ class CommentController extends Controller
     public function approveComment()
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
-
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
 
             return $this->redirectTo('');
@@ -73,7 +71,6 @@ class CommentController extends Controller
     public function disapproveComment()
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
-
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
 
             return $this->redirectTo('');

@@ -4,7 +4,6 @@ require '../vendor/autoload.php';
 
 session_start();
 
-use Controllers\AdminController;
 use Controllers\ArticleController;
 use Controllers\CommentController;
 use Controllers\Controller;
@@ -19,6 +18,7 @@ function dd($data)
     var_dump($data);
     exit;
 }
+
 $action = $_GET['action'] ?? '';
 
 try {
@@ -26,6 +26,10 @@ try {
         case '':
             $controller = new HomeController();
             $controller->homePage();
+            break;
+        case 'contact':
+            $controller = new HomeController();
+            $controller->sendEmail();
             break;
         case 'list-articles':
             $controller = new ArticleController();
@@ -102,7 +106,6 @@ try {
             break;
     }
 } catch (\Exception $exception) {
-    header("HTTP/1.0 500 Server internal Error");
     $controller = new ErrorController();
     $controller->error500($exception);
 }

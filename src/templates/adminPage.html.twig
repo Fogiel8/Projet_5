@@ -2,25 +2,32 @@
 
 {% block content %}
 
+<div  id="listed_posts_page">
+
     <h2>Gestion des commentaires :</h2>
-        {% if commentsList %}
-            {% for comment in commentsList %}
-                <div class="to_approve">
-                    <a href="index.php?action=show-article&id={{ comment.article.id }}" target="_blank">
-                        <div class="to_approve_content">
-                            <u><p>{{ comment.date|date('l j F Y à H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre', 'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'}) }}</p></u>
-                            <b><p>{{ comment.auteur.nom }} {{ comment.auteur.prenom }} à commenté :</p></b><br>
-                            <i><p>{{ comment.commentaire }}</p></i><br>
-                            <p>sur l'article : <b>{{ comment.article.titre }}</b></p><br>
-                        </div>
-                    </a>
-                    <div class="approve">
-                        <a href="index.php?action=approve-comment&id={{ comment.id }}" style="color:green;">Accepter</a> | <a href="index.php?action=disapprove-comment&id={{ comment.id }}" style="color:red;">Refuser</a>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Pas de nouveaux commentaires envoyés.</p>
-        {% endif %}
+
+    {% if commentsList %}
+    {% for comment in commentsList %}
     
+        <div class="posted_article posted_comment">
+            <u><p>{{ comment.date|date('l j F Y à H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre', 'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'}) }}</p></u>
+            <b><p>{{ comment.auteur.nom }} {{ comment.auteur.prenom }} à commenté :</p></b>
+            <i><p>{{ comment.commentaire }}</p></i>
+            <p>sur l'article : <b><a class="my_title" href="index.php?action=show-article&id={{ comment.article.id }}" target="_blank">{{ comment.article.titre }}</a></b></p>
+            <div id="addPost_link">
+                <div class="custom_button green_button">
+                    <a href="index.php?action=approve-comment&id={{ comment.id }}" onclick="return confirm('Êtes-vous sûr de vouloir accepter cet article ?');">Accepter</a>
+                </div>
+                <div class="custom_button red_button">
+                    <a href="index.php?action=disapprove-comment&id={{ comment.id }}" onclick="return confirm('Êtes-vous sûr de vouloir refuser cet article ?');">Refuser</a>
+                </div>
+            </div>
+        </div>
+        
+    {% endfor %}
+    {% else %}
+    <p>Pas de nouveaux commentaires envoyés.</p>
+    {% endif %}
+</div>
+
 {% endblock %}

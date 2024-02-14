@@ -2,51 +2,60 @@
 
 {% block content %}
 
-    <section id="articles">
-        <div class="main-container">
+    <section id="home_articles">
+        <div class="left-container">
             {% for article in latestArticles %}
-                <a class="link_article" href="index.php?action=show-article&id={{ article.getId() }}"><article class="blog-post">
-                    <h2>{{ article.getTitre() }}</h2><br>
-                    <p>{{ article.getChapo() }}</p>
-                </article></a><br>
+                <a class="link_article" href="index.php?action=show-article&id={{ article.getId() }}">
+                    <article class="home_article posted_article">
+                        <h2>{{ article.getTitre() }}</h2>
+                        <p>{{ article.getChapo() }}</p>
+                    </article>
+                </a>
             {% endfor %}
-            <a class="link_article" href="images/cv.pdf" target="_blank"><article class="blog-post">
-            <h2>Curriculum vitæ</h2><br>
-            <img style="height:225px; width:225px;" src="images/imgcv.jpg">
-                <p>
-                Vous pouvez consulter mon curriculum vitæ en cliquant ici.
-                </p>
-            </article></a>
+            <a class="link_article" href="images/cv.pdf" target="_blank">
+                <article class="home_article posted_article">
+                    <h2>Curriculum vitæ</h2>
+                    <img src="images/imgcv.jpg" alt="Image illustrant un CV.">
+                    <p>Vous pouvez consulter mon curriculum vitæ en cliquant ici.</p>
+                </article>
+            </a>
         </div>
         <div class="right-container">
-            <article class="blog-post2">
-                <h2>Delattre Thibault</h2><br>
-                <img style="height:225px; width:225px;" src="images/1697044074517.jpg">
-                <h3>"Explorons ensemble mon parcours en PHP Symfony sur Mon Petit Journal. CV, réseaux sociaux, articles. Let's connect !"</h3>
+            <article class="home_article">
+                <h2>Delattre Thibault</h2>
+                <img src="images/1697044074517.jpg" alt="Photo de Thibault Delattre.">
+                <h3>"Explorons ensemble mon parcours en PHP sur Mon Petit Journal. CV, réseaux sociaux, articles. Let's connect !"</h3>
             </article>
-            <hr><br>
-            <article class="blog-post2">
-                <h2>Votre Espace pour Partager, Écrire et Échanger</h2><br>
+            <hr>
+            <article class="home_article">
+                <h2>Votre Espace pour Partager, Écrire et Échanger</h2>
                 <p>
-                Découvrez Mon Petit Journal, une communauté dédiée au développement web. Inscrivez-vous pour rédiger des articles, partager vos connaissances, et participer activement en commentant. Rejoignez-moi dans cette aventure collaborative où chaque membre contribue à faire de Mon Petit Journal un lieu dynamique d'échanges et d'inspiration.
+                Découvrez Mon Petit Journal ! Inscrivez-vous pour intéragir sur mes articles, partager vos connaissances, et participer activement en commentant. Rejoignez-moi dans cette aventure collaborative où chaque membre contribue à faire de Mon Petit Journal un lieu dynamique d'échanges et d'inspiration.
                 </p>
             </article>      
         </div>
     </section>
     <section id="contact">
         <h2>Contactez-moi</h2>
-        <form method="post">
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" autocomplete="off" required>
+        <form action="index.php?action=contact" method="post">
+            <div id="identite">
+                <div id="nom_prenom">
+                    <label for="nom"></label>
+                    <input id="nom" type="text" name="nom" autocomplete="off" placeholder="Nom" required>
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" name="prenom" autocomplete="off" required>
+                    <label for="prenom"></label>
+                    <input type="text" name="prenom" autocomplete="off" placeholder="Prénom" required>
+                </div>
 
-            <label for="email">E-mail :</label>
-            <input type="email" name="email" autocomplete="off" required>
+                <label for="email"></label>
+                <input type="email" name="email" autocomplete="off" placeholder="E-mail" required>
+            </div>
 
-            <label for="message">Message :</label>
-            <textarea name="message" required></textarea>
+            <label for="objet"></label>
+            <input type="text" name="objet" autocomplete="off" placeholder="Objet" required>
+
+            <label for="message"></label>
+            <textarea name="message" placeholder="Message" required></textarea>
 
             <input class="bouton" type="submit" value="Envoyer">
         </form>

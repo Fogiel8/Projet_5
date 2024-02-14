@@ -35,11 +35,15 @@ class Controller
 
     protected function redirectTo(string $action, array $parameters = []): void
     {
-        $parameters = [...['action' => $action], ...$parameters];
+        $parameters = ['action' => $action] + $parameters;
 
-        header('Location:index.php?' . http_build_query($parameters));
+        $queryString = http_build_query($parameters, '', '&', PHP_QUERY_RFC3986);
+
+        header('Location: index.php?' . $queryString, true, 302);
+
         exit;
     }
+
 
     protected function twigFunction()
     {

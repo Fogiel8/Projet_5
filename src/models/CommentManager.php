@@ -18,12 +18,11 @@ class CommentManager extends DataBaseConnection
         $commentsList = [];
 
         foreach ($arrayComments as $arrayComment) {
-
             $userManager = new UserManager();
             $user = $userManager->getUserById($arrayComment['user_id']);
 
             $articleManager = new ArticleManager();
-            $article = $articleManager->getArticle($arrayComment['article_id']);
+            $article = $articleManager->getArticleById($arrayComment['article_id']);
 
             $comment = new Comment();
             $comment->setId($arrayComment['id']);
@@ -31,7 +30,6 @@ class CommentManager extends DataBaseConnection
             $comment->setArticle($article);
             $comment->setCommentaire($arrayComment['commentaire']);
             $comment->setDate($arrayComment['date_comment']);
-            $comment->setApprobation($arrayComment['approbation']);
 
             $commentsList[] = $comment;
         }
@@ -49,5 +47,29 @@ class CommentManager extends DataBaseConnection
     {
         $requete = $this->db->prepare('DELETE FROM comments WHERE id = ?');
         $requete->execute([$idComment]);
+    }
+
+    public function getApprovedCommentsByArticleId($articleId)
+    {
+        $requete = $this->db->prepare('SELECT * FROM comments WHERE article_id = ? AND approbation = 1 ORDER BY date_comment ASC');
+        $requete->execute([$articleId]);
+        $arrayComments = $requete->fetchAll();
+
+        $commentsList = [];
+
+        foreach ($arrayComments as $arrayComment) {
+            $userManager = new UserManager();
+            $user = $userManager->getUserById($arrayComment['user_id']);
+
+            $comment = new Comment();
+            $comment->setId($arrayComment['id']);
+            $comment->setAuteur($user);
+            $comment->setCommentaire($arrayComment['commentaire']);
+            $comment->setDate($arrayComment['date_comment']);
+
+            $commentsList[] = $comment;
+        }
+
+        return $commentsList;
     }
 }

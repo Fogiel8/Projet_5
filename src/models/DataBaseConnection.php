@@ -4,7 +4,7 @@ namespace Models;
 
 use PDO;
 
-class DataBaseConnection
+abstract class DataBaseConnection
 {
     public PDO $db;
 

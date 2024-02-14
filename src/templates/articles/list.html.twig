@@ -4,29 +4,26 @@
 
 <div id="listed_posts_page">
 
+    {% if user().statut == 'valide' %}
     <div id="addPost_link">
-        <div id="addPost_button">
-            {% if user() == null %}
-            <a href="index.php?action=login">Se connecter pour créer un article</a>
-            {% else %}
+        <div class="custom_button violet_button">
             <a href="index.php?action=add-article">Ajouter un article</a>
-            {% endif %}
         </div>
     </div>
+    {% endif %}
 
     <h2>Liste des articles</h2>
 
-        {% for article in articles %}
-            <a class="listed_article" href="index.php?action=show-article&id={{ article.id }}">
-                <article class="content_article">
-                    <h3>{{ article.titre }}</h3>
-                    <p>{{ article.chapo }}</p>
-                    <p class="article_auteur">{{ article.auteur.nom }} {{ article.auteur.prenom }},</p>
-                    <p class="article_date">{{ article.getDateMaj() != '0000-00-00 00:00:00' ? article.getDateMaj()|date('d F Y H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})  : article.getDateCreation()|date('d F Y H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}
-</p>
-                </article>
-            </a>
-        {% endfor %}
+    {% for article in articles %}
+    <a class="listed_article" href="index.php?action=show-article&id={{ article.id }}">
+        <article class="posted_article">
+            <h3>{{ article.titre }}</h3>
+            <p>{{ article.chapo }}</p>
+            <p class="article_auteur">{{ article.auteur.nom }} {{ article.auteur.prenom }},</p>
+            <p class="article_date">{{ article.getDateMaj() != '0000-00-00 00:00:00' ? article.getDateMaj()|date('d F Y H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})  : article.getDateCreation()|date('d F Y H:i')|replace({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'}) }}</p>
+        </article>
+    </a>
+    {% endfor %}
 
 </div>
 
