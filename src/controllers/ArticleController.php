@@ -8,7 +8,7 @@ use Models\CommentManager;
 
 class ArticleController extends Controller
 {
-    public function createArticle()
+    public function createArticle(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -36,7 +36,7 @@ class ArticleController extends Controller
         echo $this->twig->render('articles/create.html.twig');
     }
 
-    public function listArticles()
+    public function listArticles(): void
     {
         $articleManager = new ArticleManager();
 
@@ -44,7 +44,7 @@ class ArticleController extends Controller
         echo $this->twig->render('articles/list.html.twig', ['articles' => $articles,]);
     }
 
-    public function showArticle()
+    public function showArticle(): void
     {
         $articleId = $_GET['id'];
         $articleManager = new ArticleManager();
@@ -76,7 +76,7 @@ class ArticleController extends Controller
         return empty($_SESSION['errors']); // si return true, le formulaire est valide car vide, sinon false et return les messages
     }
 
-    public function deleteArticle()
+    public function deleteArticle(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -91,7 +91,7 @@ class ArticleController extends Controller
         $this->redirectTo('profile');
     }
 
-    public function editArticle()
+    public function editArticle(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');

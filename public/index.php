@@ -11,14 +11,6 @@ use Controllers\ErrorController;
 use Controllers\HomeController;
 use Controllers\LoginController;
 
-
-function dd($data)
-{
-    echo '<pre>';
-    var_dump($data);
-    exit;
-}
-
 $action = $_GET['action'] ?? '';
 
 try {

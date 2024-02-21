@@ -6,7 +6,7 @@ use Models\ArticleManager;
 
 class HomeController extends Controller
 {
-    public function homePage()
+    public function homePage(): void
     {
 
         $articleManager = new ArticleManager();
@@ -16,7 +16,7 @@ class HomeController extends Controller
         echo $this->twig->render('homepage.html.twig', ['latestArticles' => $latestArticles]);
     }
 
-    public function sendEmail()
+    public function sendEmail(): void
     {
         if ($this->isSubmit()) {
             $nom = $_POST['nom'];
