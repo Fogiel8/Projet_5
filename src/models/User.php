@@ -78,7 +78,7 @@ class User
 
 
 
-    public function authenticate($password): bool // verrification du mot de passe
+    public function authenticate(string $password): bool // verrification du mot de passe
     {
         if (PasswordManager::verifyPassword($password, $this->getMotDePasse())) {
             $_SESSION['user_id'] = $this->id;

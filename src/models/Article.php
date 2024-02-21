@@ -2,8 +2,6 @@
 
 namespace Models;
 
-use DateTime;
-
 //récuperation des données depuis la BDD
 class Article
 {
@@ -56,7 +54,7 @@ class Article
         return $this;
     }
 
-    public function getDateCreation()
+    public function getDateCreation(): string
     {
         return $this->date_creation;
     }
@@ -92,12 +90,12 @@ class Article
         return $this;
     }
 
-    public function getDateMaj()
+    public function getDateMaj(): string
     {
         return $this->date_maj;
     }
 
-    public function setAuteur(User $user)
+    public function setAuteur(User $user): void
     {
         $this->auteur = $user;
     }

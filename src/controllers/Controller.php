@@ -20,7 +20,7 @@ class Controller
         $this->twigFunction();
     }
 
-    public function showCurrentDate()
+    public function showCurrentDate(): void
     {
         $timezone = new DateTimeZone('Europe/Paris');
         $currentDate = new DateTime('now', $timezone);
@@ -45,7 +45,7 @@ class Controller
     }
 
 
-    protected function twigFunction()
+    protected function twigFunction(): void
     {
         $session = new \Twig\TwigFunction('session', function ($what) {
             return $_SESSION[$what] ?? null;
@@ -83,17 +83,17 @@ class Controller
         return empty($_SESSION['errors']) === true;
     }
 
-    public function legals()
+    public function legals(): void
     {
         echo $this->twig->render('legals.html.twig');
     }
 
-    public function privacyPolicy()
+    public function privacyPolicy(): void
     {
         echo $this->twig->render('privacy-policy.html.twig');
     }
 
-    public function cookiesPolicy()
+    public function cookiesPolicy(): void
     {
         echo $this->twig->render('cookies-policy.html.twig');
     }

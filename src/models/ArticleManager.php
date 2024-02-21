@@ -2,12 +2,10 @@
 
 namespace Models;
 
-use DateTime;
-
 // creation d'un article
 class ArticleManager extends DataBaseConnection
 {
-    public function createArticle(Article $article, $userId): Article
+    public function createArticle(Article $article, int $userId): Article
     {
         $requete = $this->db->prepare('INSERT INTO articles (titre, chapo, contenu, date_creation, date_maj, user_id) VALUES (?,?,?,NOW(), "",?)');
         $requete->execute([$article->getTitre(), $article->getChapo(), $article->getContenu(), $userId]);
@@ -17,19 +15,19 @@ class ArticleManager extends DataBaseConnection
         return $article;
     }
 
-    public function updateArticle(Article $article)
+    public function updateArticle(Article $article): void
     {
         $requete = $this->db->prepare('UPDATE articles SET titre = ?, chapo = ?, contenu = ?, date_maj = NOW() WHERE id = ?');
         $requete->execute([$article->getTitre(), $article->getChapo(), $article->getContenu(), $article->getId()]);
     }
 
-    public function deleteLigne($id)
+    public function deleteLigne(int $id): void
     {
         $requete = $this->db->prepare('DELETE FROM articles WHERE id = ? AND user_id = ?');
         $requete->execute([$id, $_SESSION['user_id']]);
     }
 
-    public function getAllArticles()
+    public function getAllArticles(): array
     {
         $requete = $this->db->query('SELECT * FROM articles ORDER BY date_creation DESC');
         $articles = $requete->fetchAll();
@@ -42,6 +40,7 @@ class ArticleManager extends DataBaseConnection
             $post->setAuteur($user);
             $posts[] = $post;
         }
+
         return $posts;
     }
 
@@ -53,7 +52,7 @@ class ArticleManager extends DataBaseConnection
     }
 
 
-    public function getArticleById($articleId)
+    public function getArticleById(int $articleId): ?Article
     {
         $requete = $this->db->prepare('SELECT * FROM articles WHERE id = ?');
         $requete->execute([$articleId]);

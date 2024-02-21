@@ -9,7 +9,7 @@ use Models\ArticleManager;
 
 class LoginController extends Controller
 {
-    public function login()
+    public function login(): void
     {
         if ($this->isSubmit()) {
             $this->isValidateLoginForm();
@@ -33,7 +33,7 @@ class LoginController extends Controller
         echo $this->twig->render('login/login.html.twig', ['errors' => []]);
     }
 
-    public function profile()
+    public function profile(): string
     {
         if (empty($_SESSION['user_id'])) {
             $this->addFlashMessage('failed', 'Vous devez vous connecter pour accéder à cette page !');
@@ -49,17 +49,16 @@ class LoginController extends Controller
         echo $this->twig->render('login/profile.html.twig', ['userArticles' => $userArticles]);
     }
 
-    public function logout()
+    public function logout(): string
     {
         session_unset();
 
         session_destroy();
 
-        header('Location: index.php?action=login');
-        exit();
+        return $this->redirectTo('login');
     }
 
-    public function signup()
+    public function signup(): void
     {
         //Vérification si le formulaire a été soumis CORRECTEMENT
         if ($this->isSubmit()) {
@@ -96,7 +95,7 @@ class LoginController extends Controller
         echo $this->twig->render('login/signup.html.twig');
     }
 
-    public function signupSubmit()
+    public function signupSubmit(): void
     {
         $userId = $_SESSION['user_id'];
         $articleManager = new ArticleManager();

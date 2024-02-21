@@ -2,8 +2,6 @@
 
 namespace Models;
 
-use DateTime;
-
 class Comment
 {
     private int $id;
@@ -23,7 +21,7 @@ class Comment
         }
     }
 
-    public function setId($id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;

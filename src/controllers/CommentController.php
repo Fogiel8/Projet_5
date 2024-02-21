@@ -9,7 +9,7 @@ use Models\UserManager;
 
 class CommentController extends Controller
 {
-    public function createComment()
+    public function createComment(): string
     {
         if (empty($_SESSION['user_id'])) {
             return $this->redirectTo('login');
@@ -39,7 +39,7 @@ class CommentController extends Controller
         }
     }
 
-    public function adminPage()
+    public function adminPage(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -52,7 +52,7 @@ class CommentController extends Controller
         echo $this->twig->render('adminPage.html.twig', ['commentsList' => $commentsList]);
     }
 
-    public function approveComment()
+    public function approveComment(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -68,7 +68,7 @@ class CommentController extends Controller
         $this->redirectTo('admin');
     }
 
-    public function disapproveComment()
+    public function disapproveComment(): string
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
