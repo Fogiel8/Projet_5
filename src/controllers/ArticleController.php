@@ -8,7 +8,7 @@ use Models\CommentManager;
 
 class ArticleController extends Controller
 {
-    public function createArticle(): string
+    public function createArticle(): bool
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -76,7 +76,7 @@ class ArticleController extends Controller
         return empty($_SESSION['errors']); // si return true, le formulaire est valide car vide, sinon false et return les messages
     }
 
-    public function deleteArticle(): string
+    public function deleteArticle(): bool
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -91,7 +91,7 @@ class ArticleController extends Controller
         $this->redirectTo('profile');
     }
 
-    public function editArticle(): string
+    public function editArticle(): bool
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
@@ -109,7 +109,6 @@ class ArticleController extends Controller
                 $article->setTitre($_POST['titre']);
                 $article->setChapo($_POST['chapo']);
                 $article->setContenu($_POST['contenu']);
-                //$article->setAuteur();
 
                 $articleManager->updateArticle($article);
 

@@ -15,5 +15,6 @@
     ],
     "require": {
         "twig/twig": "^3.0"
-    }
+    },
+    "license": "MIT"
 }

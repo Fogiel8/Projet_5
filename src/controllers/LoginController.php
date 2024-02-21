@@ -33,7 +33,7 @@ class LoginController extends Controller
         echo $this->twig->render('login/login.html.twig', ['errors' => []]);
     }
 
-    public function profile(): string
+    public function profile(): bool
     {
         if (empty($_SESSION['user_id'])) {
             $this->addFlashMessage('failed', 'Vous devez vous connecter pour accéder à cette page !');
@@ -49,7 +49,7 @@ class LoginController extends Controller
         echo $this->twig->render('login/profile.html.twig', ['userArticles' => $userArticles]);
     }
 
-    public function logout(): string
+    public function logout(): bool
     {
         session_unset();
 
