@@ -37,8 +37,8 @@ class LoginController extends Controller
     {
         if (empty($_SESSION['user_id'])) {
             $this->addFlashMessage('failed', 'Vous devez vous connecter pour accéder à cette page !');
-
-            return $this->redirectTo('login');
+            $this->redirectTo('login');
+            return false;
         }
 
         $userId = $_SESSION['user_id'];
@@ -47,6 +47,8 @@ class LoginController extends Controller
         $userArticles = $articleManager->getArticlesByUserId($userId);
 
         echo $this->twig->render('login/profile.html.twig', ['userArticles' => $userArticles]);
+
+        return true;
     }
 
     public function logout(): bool

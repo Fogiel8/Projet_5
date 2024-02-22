@@ -95,8 +95,9 @@ class ArticleController extends Controller
     {
         if (empty($_SESSION['statut']) || $_SESSION['statut'] !== 'valide') {
             $this->addFlashMessage('failed', 'Vous n\'avez pas les droits !');
+            $this->redirectTo('');
 
-            return $this->redirectTo('');
+            return false;
         }
 
         $articleId = $_GET['id'];
@@ -121,5 +122,7 @@ class ArticleController extends Controller
         }
 
         echo $this->twig->render('articles/edit.html.twig', ['article' => $article]);
+
+        return true;
     }
 }
