@@ -28,6 +28,10 @@ This project is a personal blog developed in PHP, showcasing my web development 
    - Form to add a comment
    - List of approved comments
 
+4. **User Authentication Pages:**
+   - Login and registration pages for users
+   - Only registered users with administrator rights can access the administration section
+
 ### Administration Pages
 1. **Add Article Page:**
    - Form to add a new article
@@ -38,12 +42,27 @@ This project is a personal blog developed in PHP, showcasing my web development 
 3. **Manage Articles Pages:**
    - List of articles with options to edit or delete each article
 
-4. **User Authentication Pages:**
-   - Login and registration pages for users
-   - Only registered users with administrator rights can access the administration section
-
 ### Footer Menu
 - Link to the blog administration
+
+## Site Map
+- **Level 0: Home**
+  - Description: Landing page presenting the blog, featuring the 3 latest articles (clickable to view full content), a contact form, and a link to download my CV.
+
+- **Level 1: Articles List**
+   - Description: Page displaying a list of all articles.
+
+- **Level 2: Article Page**
+  - Description: Page displaying the content of a specific article.
+   - Comment Section
+      - Description: Section allowing users to leave comments on the article.
+
+- **Level 3: Article Management (Admin Only)**
+  - Description: Page for article management tasks.
+   - Edit Article
+      - Description: Page to edit the content of a specific article.
+   - Delete Article
+      - Description: Delete the article.
 
 ## Installation Instructions
 1. Clone the repository: `git clone https://github.com/ThibDel8/Projet_5.git`
@@ -55,6 +74,18 @@ This project is a personal blog developed in PHP, showcasing my web development 
 
 ## UML Diagrams
 - Use case, class, and sequence diagrams are available in the "diagrams" folder.
+
+- **Footer (Accessible on any page)**
+  - Description: Footer section with links to legal information (terms, cookies, privacy), and Admin Page.
+   - Description: Page for approving user comments (only for admins).
+
+- **Navigation (Accessible on any page)**
+   - Login/Registration
+      - Description: Page for user authentication and registration.
+   - Profile Page
+      - Description: User profile page with the list of created articles (with the option to edit or delete).
+   - Social Networks
+      - Description: links to social media pages
 
 ## Issues
 - Find the complete list of project-related issues on the [GitHub Issues page](https://github.com/ThibDel8/Projet_5/issues).

@@ -11,6 +11,9 @@ use Controllers\ErrorController;
 use Controllers\HomeController;
 use Controllers\LoginController;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 $action = $_GET['action'] ?? '';
 
 try {
