@@ -34,6 +34,7 @@ class ArticleController extends Controller
         }
 
         echo $this->twig->render('articles/create.html.twig');
+        return true;
     }
 
     public function listArticles(): void

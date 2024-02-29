@@ -29,7 +29,7 @@
         </ul>
     </nav>
         {% if user() is not null %}
-            <p class="not_pc">Bienvenue, {{ user().prenom }} !</p>
+            <a class="not_pc" href="index.php?action=profile">Bienvenue, {{ user().prenom }} !</a>
         {% else %}
             <a class="not_pc" href="index.php?action=login">Se connecter</a>
         {% endif %}
